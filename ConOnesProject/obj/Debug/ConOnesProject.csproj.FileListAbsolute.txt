@@ -1,0 +1,12 @@
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\bin\Debug\ConOnesProject.exe.config
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\bin\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\bin\Debug\ConOnesProject.pdb
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.Properties.Resources.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.csproj.GenerateResource.cache
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.csproj.CoreCompileInputs.cache
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.pdb
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixMenu.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.csprojAssemblyReference.cache
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddRandomMatrix.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.ConsecutiveOnesProgram.resources
