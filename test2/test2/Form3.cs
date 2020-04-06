@@ -30,8 +30,6 @@ namespace test2
             Form2 form2 = new Form2(this);
             this.Close();
             form2.Show();
-
-
         }
     }
 }

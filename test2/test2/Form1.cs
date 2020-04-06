@@ -24,9 +24,14 @@ namespace test2
             form3.Show();
         }
 
-        public void changeWindow(string text)
+        void Interface1.changeWindow(string text)
         {
             label1.Text = text;
+            label1.Refresh();
+            Console.WriteLine("text value in forms1:");
+            Console.WriteLine(text);
+            Console.WriteLine("label1.text value");
+            Console.WriteLine(label1.Text);
         }
 
     }

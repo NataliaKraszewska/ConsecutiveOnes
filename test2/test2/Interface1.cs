@@ -8,6 +8,6 @@ namespace test2
 {
     interface Interface1
     {
-        void changeWindow(string text);
+       void changeWindow(string text);
     }
 }

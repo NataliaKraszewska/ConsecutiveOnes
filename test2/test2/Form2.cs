@@ -26,14 +26,14 @@ namespace test2
             InitializeComponent();
         }
 
-        Interface1 obj;
+        Interface1 obj = new Form1();
 
         private void button1_Click(object sender, EventArgs e)
         {
+            obj.changeWindow(textBox1.Text);
+            Console.WriteLine("text value in forms2:");
+            Console.WriteLine(textBox1.Text);
             this.Close();
-            obj.changeWindow(label1.Text);
         }
-
-
     }
 }
