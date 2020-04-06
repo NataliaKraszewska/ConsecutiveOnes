@@ -16,21 +16,18 @@ namespace test2
         {
             InitializeComponent();
         }
-        
 
-        private Form1 mainForm = null;
-
-        public Form2(Form callingForm)
+        private Interface1 mainForm;
+      
+        public Form2(Interface1 callingForm)
         {
-            mainForm = callingForm as Form1;
+            mainForm = callingForm;
             InitializeComponent();
         }
 
-        Interface1 obj = new Form1();
-
         private void button1_Click(object sender, EventArgs e)
         {
-            obj.changeWindow(textBox1.Text);
+            mainForm.changeWindow(textBox1.Text);
             Console.WriteLine("text value in forms2:");
             Console.WriteLine(textBox1.Text);
             this.Close();

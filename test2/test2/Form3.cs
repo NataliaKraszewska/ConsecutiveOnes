@@ -17,17 +17,17 @@ namespace test2
             InitializeComponent();
         }
 
-        private Form1 mainForm = null;
-        public Form3(Form callingForm)
+        private Interface1 mainForm;
+        public Form3(Interface1 callingForm)
         {
-            mainForm = callingForm as Form1;
+            mainForm = callingForm;
             InitializeComponent();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(this);
+            Form2 form2 = new Form2(mainForm);
             this.Close();
             form2.Show();
         }

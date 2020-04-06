@@ -12,7 +12,6 @@ namespace test2
 {
     public partial class Form1 : Form, Interface1
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +19,8 @@ namespace test2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3(this);
+
+            Form3 form3 = new Form3(this as Interface1);
             form3.Show();
         }
 
