@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,34 +47,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddMatrixMenu.cs">
+    <Compile Include="AddMatrixFromFileForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddMatrixMenu.Designer.cs">
-      <DependentUpon>AddMatrixMenu.cs</DependentUpon>
+    <Compile Include="AddMatrixFromFileForm.Designer.cs">
+      <DependentUpon>AddMatrixFromFileForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddRandomMatrix.cs">
+    <Compile Include="AddMatrixMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddRandomMatrix.Designer.cs">
-      <DependentUpon>AddRandomMatrix.cs</DependentUpon>
+    <Compile Include="AddMatrixMenuForm.Designer.cs">
+      <DependentUpon>AddMatrixMenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConsecutiveOnesProgram.cs">
+    <Compile Include="AddRandomMatrixForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConsecutiveOnesProgram.Designer.cs">
-      <DependentUpon>ConsecutiveOnesProgram.cs</DependentUpon>
+    <Compile Include="AddRandomMatrixForm.Designer.cs">
+      <DependentUpon>AddRandomMatrixForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddYourOwnMatrixForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddYourOwnMatrixForm.Designer.cs">
+      <DependentUpon>AddYourOwnMatrixForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConsecutiveOnesProgramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsecutiveOnesProgramForm.Designer.cs">
+      <DependentUpon>ConsecutiveOnesProgramForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IFormsMatrixInformations.cs" />
+    <Compile Include="InputMatrix.cs" />
+    <Compile Include="MatrixFromFile.cs" />
+    <Compile Include="MatrixFromText.cs" />
+    <Compile Include="ModifyMatrixForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyMatrixForms.Designer.cs">
+      <DependentUpon>ModifyMatrixForms.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddMatrixMenu.resx">
-      <DependentUpon>AddMatrixMenu.cs</DependentUpon>
+    <Compile Include="RandomMatrix.cs" />
+    <EmbeddedResource Include="AddMatrixFromFileForm.resx">
+      <DependentUpon>AddMatrixFromFileForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddRandomMatrix.resx">
-      <DependentUpon>AddRandomMatrix.cs</DependentUpon>
+    <EmbeddedResource Include="AddMatrixMenuForm.resx">
+      <DependentUpon>AddMatrixMenuForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConsecutiveOnesProgram.resx">
-      <DependentUpon>ConsecutiveOnesProgram.cs</DependentUpon>
+    <EmbeddedResource Include="AddRandomMatrixForm.resx">
+      <DependentUpon>AddRandomMatrixForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddYourOwnMatrixForm.resx">
+      <DependentUpon>AddYourOwnMatrixForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsecutiveOnesProgramForm.resx">
+      <DependentUpon>ConsecutiveOnesProgramForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyMatrixForms.resx">
+      <DependentUpon>ModifyMatrixForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

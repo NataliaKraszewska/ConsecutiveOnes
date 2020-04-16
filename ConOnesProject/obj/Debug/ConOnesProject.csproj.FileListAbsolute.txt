@@ -6,7 +6,10 @@ C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProje
 C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.csproj.CoreCompileInputs.cache
 C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.exe
 C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.pdb
-C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixMenu.resources
 C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.csprojAssemblyReference.cache
-C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddRandomMatrix.resources
-C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.ConsecutiveOnesProgram.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixFromFileForm.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixMenuForm.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddRandomMatrixForm.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.AddYourOwnMatrixForm.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.ConsecutiveOnesProgramForm.resources
+C:\Users\natkr\source\repos\ConOnesProject\ConOnesProject\obj\Debug\ConOnesProject.ModifyMatrixForms.resources

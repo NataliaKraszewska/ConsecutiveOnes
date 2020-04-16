@@ -1,6 +1,6 @@
 ﻿namespace ConOnesProject
 {
-    partial class AddRandomMatrix
+    partial class AddRandomMatrixForm
     {
         /// <summary>
         /// Required designer variable.
@@ -110,7 +110,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 51);
+            this.panel1.Size = new System.Drawing.Size(540, 51);
             this.panel1.TabIndex = 0;
             // 
             // panel8
@@ -119,7 +119,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(126, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(217, 51);
+            this.panel8.Size = new System.Drawing.Size(284, 51);
             this.panel8.TabIndex = 2;
             // 
             // label1
@@ -136,7 +136,7 @@
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(343, 0);
+            this.panel7.Location = new System.Drawing.Point(410, 0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(130, 51);
             this.panel7.TabIndex = 1;
@@ -157,7 +157,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 51);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(473, 399);
+            this.panel2.Size = new System.Drawing.Size(540, 393);
             this.panel2.TabIndex = 1;
             // 
             // panel5
@@ -166,7 +166,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 20);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(473, 327);
+            this.panel5.Size = new System.Drawing.Size(540, 321);
             this.panel5.TabIndex = 2;
             // 
             // splitContainer1
@@ -185,8 +185,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel11);
             this.splitContainer1.Panel2.Controls.Add(this.panel9);
-            this.splitContainer1.Size = new System.Drawing.Size(473, 327);
-            this.splitContainer1.SplitterDistance = 291;
+            this.splitContainer1.Size = new System.Drawing.Size(540, 321);
+            this.splitContainer1.SplitterDistance = 332;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel15
@@ -195,7 +195,7 @@
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel15.Location = new System.Drawing.Point(0, 77);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(291, 250);
+            this.panel15.Size = new System.Drawing.Size(332, 244);
             this.panel15.TabIndex = 2;
             // 
             // splitContainer2
@@ -221,8 +221,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.panel25);
             this.splitContainer2.Panel2.Controls.Add(this.panel24);
             this.splitContainer2.Panel2.Controls.Add(this.panel23);
-            this.splitContainer2.Size = new System.Drawing.Size(291, 250);
-            this.splitContainer2.SplitterDistance = 199;
+            this.splitContainer2.Size = new System.Drawing.Size(332, 244);
+            this.splitContainer2.SplitterDistance = 227;
             this.splitContainer2.TabIndex = 0;
             // 
             // panel22
@@ -231,7 +231,7 @@
             this.panel22.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel22.Location = new System.Drawing.Point(0, 105);
             this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(199, 32);
+            this.panel22.Size = new System.Drawing.Size(227, 32);
             this.panel22.TabIndex = 5;
             // 
             // label6
@@ -250,7 +250,7 @@
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel21.Location = new System.Drawing.Point(0, 94);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(199, 11);
+            this.panel21.Size = new System.Drawing.Size(227, 11);
             this.panel21.TabIndex = 4;
             // 
             // panel20
@@ -259,7 +259,7 @@
             this.panel20.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel20.Location = new System.Drawing.Point(0, 63);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(199, 31);
+            this.panel20.Size = new System.Drawing.Size(227, 31);
             this.panel20.TabIndex = 3;
             // 
             // label5
@@ -278,7 +278,7 @@
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel19.Location = new System.Drawing.Point(0, 53);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(199, 10);
+            this.panel19.Size = new System.Drawing.Size(227, 10);
             this.panel19.TabIndex = 2;
             // 
             // panel18
@@ -287,7 +287,7 @@
             this.panel18.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel18.Location = new System.Drawing.Point(0, 23);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(199, 30);
+            this.panel18.Size = new System.Drawing.Size(227, 30);
             this.panel18.TabIndex = 1;
             // 
             // label4
@@ -306,7 +306,7 @@
             this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel17.Location = new System.Drawing.Point(0, 0);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(199, 23);
+            this.panel17.Size = new System.Drawing.Size(227, 23);
             this.panel17.TabIndex = 0;
             // 
             // panel28
@@ -315,7 +315,7 @@
             this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel28.Location = new System.Drawing.Point(0, 104);
             this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(88, 33);
+            this.panel28.Size = new System.Drawing.Size(101, 33);
             this.panel28.TabIndex = 5;
             // 
             // textBox3
@@ -323,7 +323,7 @@
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox3.Location = new System.Drawing.Point(0, 0);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(88, 20);
+            this.textBox3.Size = new System.Drawing.Size(101, 20);
             this.textBox3.TabIndex = 0;
             // 
             // panel27
@@ -331,7 +331,7 @@
             this.panel27.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel27.Location = new System.Drawing.Point(0, 94);
             this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(88, 10);
+            this.panel27.Size = new System.Drawing.Size(101, 10);
             this.panel27.TabIndex = 4;
             // 
             // panel26
@@ -340,7 +340,7 @@
             this.panel26.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel26.Location = new System.Drawing.Point(0, 63);
             this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(88, 31);
+            this.panel26.Size = new System.Drawing.Size(101, 31);
             this.panel26.TabIndex = 3;
             // 
             // textBox2
@@ -348,7 +348,7 @@
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox2.Location = new System.Drawing.Point(0, 0);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(88, 20);
+            this.textBox2.Size = new System.Drawing.Size(101, 20);
             this.textBox2.TabIndex = 0;
             // 
             // panel25
@@ -356,7 +356,7 @@
             this.panel25.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel25.Location = new System.Drawing.Point(0, 53);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(88, 10);
+            this.panel25.Size = new System.Drawing.Size(101, 10);
             this.panel25.TabIndex = 2;
             // 
             // panel24
@@ -365,7 +365,7 @@
             this.panel24.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel24.Location = new System.Drawing.Point(0, 23);
             this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(88, 30);
+            this.panel24.Size = new System.Drawing.Size(101, 30);
             this.panel24.TabIndex = 1;
             // 
             // textBox1
@@ -373,7 +373,7 @@
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(88, 20);
+            this.textBox1.Size = new System.Drawing.Size(101, 20);
             this.textBox1.TabIndex = 0;
             // 
             // panel23
@@ -381,7 +381,7 @@
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel23.Location = new System.Drawing.Point(0, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(88, 23);
+            this.panel23.Size = new System.Drawing.Size(101, 23);
             this.panel23.TabIndex = 0;
             // 
             // panel13
@@ -390,7 +390,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(0, 46);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(291, 31);
+            this.panel13.Size = new System.Drawing.Size(332, 31);
             this.panel13.TabIndex = 1;
             // 
             // label3
@@ -409,7 +409,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(291, 46);
+            this.panel10.Size = new System.Drawing.Size(332, 46);
             this.panel10.TabIndex = 0;
             // 
             // panel11
@@ -419,7 +419,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(0, 46);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(178, 281);
+            this.panel11.Size = new System.Drawing.Size(204, 275);
             this.panel11.TabIndex = 1;
             // 
             // panel14
@@ -428,7 +428,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(0, 31);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(178, 250);
+            this.panel14.Size = new System.Drawing.Size(204, 244);
             this.panel14.TabIndex = 1;
             // 
             // panel16
@@ -437,7 +437,7 @@
             this.panel16.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel16.Location = new System.Drawing.Point(0, 0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(178, 23);
+            this.panel16.Size = new System.Drawing.Size(204, 23);
             this.panel16.TabIndex = 0;
             // 
             // comboBox1
@@ -454,7 +454,7 @@
             "80%"});
             this.comboBox1.Location = new System.Drawing.Point(0, 0);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(178, 21);
+            this.comboBox1.Size = new System.Drawing.Size(204, 21);
             this.comboBox1.TabIndex = 0;
             // 
             // panel12
@@ -463,7 +463,7 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(178, 31);
+            this.panel12.Size = new System.Drawing.Size(204, 31);
             this.panel12.TabIndex = 0;
             // 
             // label2
@@ -473,25 +473,25 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(177, 13);
+            this.label2.Size = new System.Drawing.Size(192, 26);
             this.label2.TabIndex = 0;
-            this.label2.Text = "SET DIFFICULTNESS LEVEL:";
+            this.label2.Text = "SET PERCENTAGE LENGTH OF\r\nA STRING OF ONES:";
             // 
             // panel9
             // 
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(178, 46);
+            this.panel9.Size = new System.Drawing.Size(204, 46);
             this.panel9.TabIndex = 0;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.splitContainer3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 347);
+            this.panel4.Location = new System.Drawing.Point(0, 341);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(473, 52);
+            this.panel4.Size = new System.Drawing.Size(540, 52);
             this.panel4.TabIndex = 1;
             // 
             // splitContainer3
@@ -507,8 +507,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.button2);
-            this.splitContainer3.Size = new System.Drawing.Size(473, 52);
-            this.splitContainer3.SplitterDistance = 231;
+            this.splitContainer3.Size = new System.Drawing.Size(540, 52);
+            this.splitContainer3.SplitterDistance = 263;
             this.splitContainer3.TabIndex = 0;
             // 
             // button1
@@ -516,7 +516,7 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(231, 52);
+            this.button1.Size = new System.Drawing.Size(263, 52);
             this.button1.TabIndex = 0;
             this.button1.Text = "BACK";
             this.button1.UseVisualStyleBackColor = true;
@@ -527,7 +527,7 @@
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(238, 52);
+            this.button2.Size = new System.Drawing.Size(273, 52);
             this.button2.TabIndex = 0;
             this.button2.Text = "ADD MATRIX";
             this.button2.UseVisualStyleBackColor = true;
@@ -538,17 +538,17 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(473, 20);
+            this.panel3.Size = new System.Drawing.Size(540, 20);
             this.panel3.TabIndex = 0;
             // 
-            // AddRandomMatrix
+            // AddRandomMatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 450);
+            this.ClientSize = new System.Drawing.Size(540, 444);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "AddRandomMatrix";
+            this.Name = "AddRandomMatrixForm";
             this.Text = "AddRandomMatrix";
             this.panel1.ResumeLayout(false);
             this.panel8.ResumeLayout(false);

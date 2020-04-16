@@ -16,7 +16,7 @@ namespace ConOnesProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConsecutiveOnesProgram());
+            Application.Run(new ConsecutiveOnesProgramForm());
         }
     }
 }
