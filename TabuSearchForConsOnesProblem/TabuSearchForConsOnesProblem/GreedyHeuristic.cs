@@ -9,6 +9,7 @@ namespace TabuSearchForConsOnesProblem
     class GreedyHeuristic
     {
         int[,] matrix;
+        int[,] greedyHeuristicsMatrix;
 
         public GreedyHeuristic(int [,] inputMatrix)
         {
@@ -75,8 +76,9 @@ namespace TabuSearchForConsOnesProblem
         }
 
 
-        public void GreedyHeuristicAlgorythm()
+        public int[,] GreedyHeuristicAlgorythm()
         {
+            int matrixHeight = matrix.GetLength(0);
             int matrixWidth = matrix.GetLength(1);
             var columnsOrder = new List<int>();
             var columnsToAdd = new List<int>();
@@ -119,14 +121,15 @@ namespace TabuSearchForConsOnesProblem
                 }
             }
 
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            greedyHeuristicsMatrix = new int[matrixHeight, matrixWidth];
+            for (int i = 0; i < matrixHeight; i++)
             {
-                for (int ij = 0; ij < columnsOrder.Count; ij++)
+                for (int j = 0; j < matrixWidth; j++)
                 {
-                    Console.Write(matrix[i, columnsOrder[ij]] + " ");
+                    greedyHeuristicsMatrix[i,j] = matrix[i, columnsOrder[j]];
                 }
-                Console.WriteLine();
             }
+            return greedyHeuristicsMatrix;
         }
     }
 }
