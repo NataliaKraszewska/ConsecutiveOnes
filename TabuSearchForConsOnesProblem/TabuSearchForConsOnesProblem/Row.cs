@@ -8,9 +8,12 @@ namespace TabuSearchForConsOnesProblem
 {
     class Row
     {
-        List<int> row;
+        public List<int> row;
+        List<int> oryginal_row;
+        List<int> columns;
+        List<int> oryginal_columns;
         List<int> rev_row;
-        int position_in_matrix;
+        public int position_in_matrix;
         public int number_of_results;
         public List<Entries_to_delete> entries_to_delete = new List<Entries_to_delete>();
         public int number_of_groups;
@@ -19,11 +22,65 @@ namespace TabuSearchForConsOnesProblem
         public Row(List<int> in_row, int id)
         {
             row = in_row;
+            oryginal_row = in_row;
+            columns = Get_columns();
+            oryginal_columns = columns;
             //in_row.Reverse();
             //reverse_row = in_row;
             position_in_matrix = id;
         }
 
+        List<int> Get_columns()
+        {
+            columns = new List<int>();
+            for(int i=0;i<row.Count;i++)
+            {
+                columns.Add(i);
+            }
+            return columns;
+        }
+
+        public void Change_row(List<int>column_to_delete)
+        {
+            if (column_to_delete.Count != 0)
+                {
+                List<int> new_row = new List<int>();
+                for (int i = 0; i < oryginal_row.Count; i++)
+                {
+                    if (!column_to_delete.Contains(i))
+                    {
+                        new_row.Add(row[i]);
+                    }
+                }
+                row = new_row;
+
+                List<int> new_columns = new List<int>();
+                for (int i = 0; i < oryginal_columns.Count; i++)
+                {
+                    if (!column_to_delete.Contains(i))
+                    {
+                        new_columns.Add(oryginal_columns[i]);
+                    }
+                }
+                columns = new_columns;
+                /*
+                for(int i= 0;i<new_columns.Count;i++)
+                {
+                    Console.Write(new_columns[i] + " ");
+                }Console.WriteLine();
+                */
+            }
+        }
+
+        public List<int> Get_columns_to_delete_from_matrix(List<int> columns_to_delete)
+        {
+            List<int> columns_to_delete_from_matrix = new List<int>();
+            for(int i=0;i<columns_to_delete.Count;i++)
+            {
+                columns_to_delete_from_matrix.Add(columns[columns_to_delete[i]]);
+            }
+            return columns_to_delete_from_matrix;
+        }
 
         private List<int> Get_ones_position(bool reverse)
         {
@@ -34,6 +91,7 @@ namespace TabuSearchForConsOnesProblem
                 {
                     if (row[i] == 1)
                     {
+                      
                         ones_position.Add(i);
                     }
                 }
@@ -48,6 +106,7 @@ namespace TabuSearchForConsOnesProblem
                     }
                 }
             }
+
             return ones_position;
         }
 
@@ -55,6 +114,16 @@ namespace TabuSearchForConsOnesProblem
         private List<Ones_entries> Get_ones_entries(bool reverse)
         {
             List<int> ones_position = Get_ones_position(reverse);
+            if(ones_position.Count == 0)
+            {
+               for(int i = 0;i < row.Count; i++)
+                {
+                    Console.Write(row[i] + " ");
+                }Console.WriteLine();
+
+                List<Ones_entries> ones_entries_null = new List<Ones_entries>();
+                return ones_entries_null;
+            }
             List<Ones_entries> ones_entries = new List<Ones_entries>();
             int prev_position = ones_position[0];
             int seq_start_idx = ones_position[0];
@@ -114,10 +183,8 @@ namespace TabuSearchForConsOnesProblem
             {
                 Console.WriteLine(entry_to_delete[i].start + " " + entry_to_delete[i].length + " " + entry_to_delete[i].row_id);
             }*/
-            
-
-
             //Console.WriteLine();
+
             rev_row = Get_rev_row();
             List<Entries_to_delete> rev_entry_to_delete = Column_to_delete(true);
             /*
@@ -135,7 +202,7 @@ namespace TabuSearchForConsOnesProblem
                 bool is_entry_in_list = check_entry_in_list(entry_to_delete, new_start, rev_entry_to_delete[i].length);
                 if (is_entry_in_list == false)
                 {
-                    entry_to_delete.Add(new Entries_to_delete(new_start, rev_entry_to_delete[i].length, rev_entry_to_delete[i].row_id));
+                    entry_to_delete.Add(new Entries_to_delete(new_start, rev_entry_to_delete[i].length, rev_entry_to_delete[i].id));
 
                 }
             }
@@ -173,16 +240,14 @@ namespace TabuSearchForConsOnesProblem
 
             for (int i = 0; i < entry_to_delete.Count; i++)
             {
-                if (!list_of_groups.Contains(entry_to_delete[i].row_id))
+                if (!list_of_groups.Contains(entry_to_delete[i].id))
                 {
-                    list_of_groups.Add(entry_to_delete[i].row_id);
+                    list_of_groups.Add(entry_to_delete[i].id);
                 }
 
             }
 
             number_of_groups = list_of_groups.Count;
-//            Console.WriteLine(number_of_results);
-
             entries_to_delete = entry_to_delete;
 
         }
@@ -197,9 +262,9 @@ namespace TabuSearchForConsOnesProblem
             List<int> list_of_groups = new List<int>();
             for(int i=0;i<entries.Count;i++)
             {
-                if(! list_of_groups.Contains(entries[i].row_id))
+                if(! list_of_groups.Contains(entries[i].id))
                 {
-                    list_of_groups.Add(entries[i].row_id);
+                    list_of_groups.Add(entries[i].id);
                 }
                
             }
@@ -210,7 +275,7 @@ namespace TabuSearchForConsOnesProblem
                 int numer_of_results_in_group = 0;
                 for(int j = 0; j < entries.Count; j++)
                 {
-                    if (entries[j].row_id == list_of_groups[i])
+                    if (entries[j].id == list_of_groups[i])
                         numer_of_results_in_group += 1;
                 }
                 number_of_result = number_of_result * numer_of_results_in_group;
@@ -222,24 +287,7 @@ namespace TabuSearchForConsOnesProblem
         }
 
         public List<Entries_to_delete> Column_to_delete(bool reverse)
-        {
-            /*if (reverse)
-            {
-                for (int x = 0; x < row.Count; x++)
-                {
-                    Console.Write(reverse_row[x] + " ");
-                }
-                Console.WriteLine();
-            }
-            else
-            {
-                for (int x = 0; x < row.Count; x++)
-                {
-                    Console.Write(row[x] + " ");
-                }
-                Console.WriteLine();
-            }*/
-     
+        {    
             List<Ones_entries> ones_entries = Get_ones_entries(reverse);
             //for(int i = 0; i < ones_entries.Count; i++)
             //{
@@ -263,7 +311,6 @@ namespace TabuSearchForConsOnesProblem
                 }
                 
 
-                //Entries_to_delete entries;
                 int seq_start = ones_entries[i].start;
                 int seq_end = ones_entries[i].start + ones_entries[i].length - 1;
 
@@ -345,47 +392,19 @@ namespace TabuSearchForConsOnesProblem
                 }
              }
 
-            
-            //sprawdz odwrotny wiersz i zobacz czy nie ma mneiejszej ilosci kolumn do usuniecia
-            //get_result_permutation_for_row(entry_to_delete);
+            //return entry_to_delete;
+            List<Entries_to_delete> sorted_entry_to_delete = entry_to_delete.OrderBy(o => o.start).ToList();
 
-            return entry_to_delete;
+            /*Console.WriteLine("xxxxxxxxx");
+            for(int i=0;i<sorted_entry_to_delete.Count;i++)
+            {
+                Console.Write(sorted_entry_to_delete[i].start+ " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("xxxxxxx");
+            */
+            return sorted_entry_to_delete;
         }
         
-
-        void get_result_permutation_for_row(List<Entries_to_delete> entries) //odwrotna lista nie wiem dlaczego + dodaj, że po id ma sprawdzać by dodawać do listy z każdej grupy id
-        {
-            List<Result_permutation_for_row> permutation = new List<Result_permutation_for_row>();
-            for(int i = 0; i < entries.Count; i++)
-            {
-                Console.WriteLine(entries[i].row_id);
-                if (entries[i].row_id == 0)
-                {
-                    permutation.Add(new Result_permutation_for_row(entries[i], entries[i].row_id));
-                }
-                else
-                {
-
-                    for(int j = 0; j < permutation.Count; j++)
-                    {
-                        if (entries[i].start != permutation[j].Get_end_of_last_element_in_list())
-                        {
-                            permutation[j].entries.Add(entries[i]);
-                        }
-                    }
-                }
-            }
-
-            for(int i= 0; i < permutation.Count; i++)
-            {
-                for(int j = 0;j< permutation[i].entries.Count; j++)
-                {
-                    Console.WriteLine(permutation[i].entries[j].start + " " + permutation[i].entries[j].length);
-                }
-            }
-
-        }
-
-
     }
 }
