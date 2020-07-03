@@ -135,5 +135,13 @@ namespace ConOnesProject
             modify.Show();
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string tmp_text = textBox6.Text;
+            Console.WriteLine(tmp_text);
+            TabuSearchAlgorithmForm tabu = new TabuSearchAlgorithmForm(this as IFormsMatrixInformations, tmp_text);
+            tabu.Show();
+        }
     }
 }

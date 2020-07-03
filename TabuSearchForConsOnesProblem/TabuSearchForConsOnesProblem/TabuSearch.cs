@@ -285,6 +285,34 @@ namespace TabuSearchForConsOnesProblem
             }
         }
 
+        bool IsMatrixConsecutiveOnes(int[,] matrix)
+        {
+            int matrixWidth = matrix.GetLength(1);
+            int matrixHeight = matrix.GetLength(0);
+            for (int i = 0; i < matrixHeight; i++)
+            {
+                bool foundOne = false;
+                bool foundZeroAfterOne = false;
+
+                for (int j = 0; j < matrixWidth; j++)
+                {
+                    if (!foundOne && matrix[i, j] == 1)
+                    {
+                        foundOne = true;
+                    }
+                    if (foundOne && matrix[i, j] == 0)
+                    {
+                        foundZeroAfterOne = true;
+                    }
+                    if (foundZeroAfterOne && matrix[i, j] == 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public void TabuSearchAlgorythm()
         {
             
@@ -308,8 +336,8 @@ namespace TabuSearchForConsOnesProblem
             GreedyHeuristic initialMatrix = new GreedyHeuristic(matrix);
             greedyHeuristicsMatrix = initialMatrix.GreedyHeuristicAlgorythm();
 
-            //Console.WriteLine("Greedy heuristics matrix:");
-            //ShowMatrix(greedyHeuristicsMatrix);
+            Console.WriteLine("Greedy heuristics matrix:");
+            ShowMatrix(greedyHeuristicsMatrix);
 
             CmaxEstimation cmaxEstimator = new CmaxEstimation(greedyHeuristicsMatrix);
             int cmaxValue = cmaxEstimator.GetCmaxValue();
@@ -331,7 +359,7 @@ namespace TabuSearchForConsOnesProblem
 
             int maxStepWithoutBetterResult = (int)(0.8 * matrix.GetLength(1)); //80% * liczba kolumn
             int stepWithoutBetterResultCount = 0;
-            int GenerateDiversifyingMovementsCount = (int)(0.5 * matrix.GetLength(1)); ;
+            int GenerateDiversifyingMovementsCount = (int)(3 * matrix.GetLength(1)); ;
 
 
 
@@ -339,7 +367,10 @@ namespace TabuSearchForConsOnesProblem
 
 
             while (GenerateDiversifyingMovementsCount != 0)
-            {
+            //{
+
+            //while (!IsMatrixConsecutiveOnes(result.matrix))
+            { 
                 //Console.WriteLine(GenerateDiversifyingMovementsCount + " " + stepWithoutBetterResultCount);
                 int tabuListMaxSize = (int) (0.3 * matrix.GetLength(1));
                 currentMatrix = ChangeInMatrix(currentMatrix, TabuList); // robimy ruch
@@ -396,9 +427,11 @@ namespace TabuSearchForConsOnesProblem
             ShowMatrix(result.matrix);
             Console.WriteLine("Result Matrix: ");
             ShowResultMatrix(result.matrix, result.columnToDelete);
+            for(int i = 0; i< result.columnsOrder.Count; i++)
+            {
+                Console.Write(result.columnsOrder[i] + " ");
+            }Console.WriteLine();
             
-
-
             
 
         }

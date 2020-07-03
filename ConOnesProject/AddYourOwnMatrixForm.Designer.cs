@@ -201,13 +201,13 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // AddYourOwnMatrix
+            // AddYourOwnMatrixForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 450);
             this.Controls.Add(this.panel1);
-            this.Name = "AddYourOwnMatrix";
+            this.Name = "AddYourOwnMatrixForm";
             this.Text = "AddYourOwnMatrix";
             this.panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);

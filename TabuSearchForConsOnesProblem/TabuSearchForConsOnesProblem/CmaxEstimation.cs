@@ -42,6 +42,8 @@ namespace TabuSearchForConsOnesProblem
 
         List<int> Get_column_to_delete_from_one_row(Row row)
         {
+
+            //Console.WriteLine("______________________________________________");
             List<Entries_to_delete> best_entry = new List<Entries_to_delete>();
             List<int> columns_to_delete = new List<int>();
             if (row.number_of_results == 1)
@@ -51,6 +53,7 @@ namespace TabuSearchForConsOnesProblem
                     for (int y = 0; y < row.entries_to_delete[x].columns.Count; y++)
                     {
                         columns_to_delete.Add(row.entries_to_delete[x].columns[y]);
+                        //Console.WriteLine("tu1: " + row.entries_to_delete[x].columns[y]);
                     }
                     if(! best_entry.Contains(row.entries_to_delete[x]))
                         best_entry.Add(row.entries_to_delete[x]);
@@ -59,6 +62,7 @@ namespace TabuSearchForConsOnesProblem
             }
             else
             {
+                //Console.WriteLine("------------ columns in row -------------------");
                 int number_of_groups = row.number_of_groups;
                 for (int x = 0; x < number_of_groups; x++)
                 {
@@ -68,48 +72,28 @@ namespace TabuSearchForConsOnesProblem
                         if (row.entries_to_delete[y].id == x)
                         {
                             entry_to_del_by_len.Add(row.entries_to_delete[y]);
-                        }
+                            //for(int a = 0; a< row.entries_to_delete[y].columns.Count;a++)
+                              //  Console.Write(row.entries_to_delete[y].columns[a] + " ");
+                        }//Console.WriteLine();
                         entry_to_del_by_len = entry_to_del_by_len.OrderBy(o => o.length).ToList();
                     }
 
-
-                   /* for(int i=0;i<entry_to_del_by_len.Count;i++)
-                    {
-                        Console.WriteLine("del: start: " + entry_to_del_by_len[i].start + " length: " + entry_to_del_by_len[i].length + " id: " + row.position_in_matrix);
-                    }
-                    */
-
                     for (int i = 0; i < entry_to_del_by_len.Count; i++)
                     {
-                        //Console.WriteLine("tutaj!");
-                        //for(int c = 0;c< row.row.Count;c++)
-                        //{
-                          //  Console.Write(row.row[c] + " ");
-                        //}Console.WriteLine();
-                        //for (int w = 0; w < entry_to_del_by_len.Count; w++)
-                       // {
-                          //  Console.WriteLine("del: start: " + entry_to_del_by_len[w].start + " length: " + entry_to_del_by_len[w].length + " id: " + entry_to_del_by_len[w].id);
-                        //}
-
                         Entries_to_delete candidate_to_del = entry_to_del_by_len[i];
 
                         if (best_entry.Count != 0)
                         {
                             int end = best_entry[best_entry.Count - 1].start + best_entry[best_entry.Count - 1].length;
-                            //Console.WriteLine("candidate start: " + candidate_to_del.start + " last entry start: " + best_entry[best_entry.Count - 1].start + " last entry len: " + end);
                         }
-                       // Console.WriteLine(best_entry.Count);
+
                         if (best_entry.Count == 0) 
                         {
-                            //if(best_entry.Count!=0)
-                                //Console.WriteLine(candidate_to_del.start + " " + best_entry[best_entry.Count - 1].start + " " + best_entry[best_entry.Count - 1].start + best_entry[best_entry.Count - 1].length);
-                            //Console.WriteLine("best entry size: " + best_entry.Count);
-                            //Console.WriteLine("candidate to del: start: " + candidate_to_del.start + " length: " + candidate_to_del.length + " id: " + candidate_to_del.id);
-
                             for (int j = 0; j < candidate_to_del.columns.Count; j++)
                             {
 
                                 columns_to_delete.Add(candidate_to_del.columns[j]);
+                                //Console.WriteLine("tu2: " + candidate_to_del.columns[j]);
                                 
                             }
                             best_entry.Add(candidate_to_del);
@@ -121,25 +105,22 @@ namespace TabuSearchForConsOnesProblem
                         {
                             if(candidate_to_del.start != best_entry[best_entry.Count - 1].start + best_entry[best_entry.Count - 1].length)
                             {
-                                //Console.WriteLine("1 candidate to del: start: " + candidate_to_del.start + " length: " + candidate_to_del.length + " id: " + candidate_to_del.id);
-
-                               // bool res1 = candidate_to_del.start <= best_entry[best_entry.Count - 1].start;
-                                //Console.WriteLine(candidate_to_del.start + " <= " + best_entry[best_entry.Count - 1].start + " = " + res1);
-
-                                //bool res2 = candidate_to_del.start + candidate_to_del.length >= best_entry[best_entry.Count - 1].start;
-
-                                //int end = candidate_to_del.start + candidate_to_del.length;
-                                //Console.WriteLine(end + ">=" + best_entry[best_entry.Count -1].start + "=" +res2);
-
-
                                 if (!(candidate_to_del.start <= best_entry[best_entry.Count - 1].start && candidate_to_del.start + candidate_to_del.length >= best_entry[best_entry.Count - 1].start))
                                 {
-                                    //Console.WriteLine("2 candidate to del: start: " + candidate_to_del.start + " length: " + candidate_to_del.length + " id: " + candidate_to_del.id);
 
                                     for (int j = 0; j < candidate_to_del.columns.Count; j++)
                                     {
 
                                         columns_to_delete.Add(candidate_to_del.columns[j]);
+                                        //Console.WriteLine("tu3: " + candidate_to_del.columns[j]);
+                                        /*if(candidate_to_del.columns[j]  < 0)
+                                        {
+                                            Console.WriteLine("candidate to del columns: ");
+                                            for(int a = 0; a<candidate_to_del.columns.Count;a++)
+                                            {
+                                                Console.Write(candidate_to_del.columns[a] + " ");
+                                            }Console.WriteLine();
+                                        }*/
 
                                     }
                                     best_entry.Add(candidate_to_del);
@@ -155,93 +136,17 @@ namespace TabuSearchForConsOnesProblem
                 }
 
             }
-                List<int> columns_to_delete_from_matrix = row.Get_columns_to_delete_from_matrix(columns_to_delete);
 
-                return columns_to_delete_from_matrix;
+           // for(int i = 0; i < columns_to_delete.Count; i++)
+            //{
+              //  Console.Write(columns_to_delete[i] + " ");
+            //}Console.WriteLine();
+
+            List<int> columns_to_delete_from_matrix = row.Get_columns_to_delete_from_matrix(columns_to_delete);
+
+            return columns_to_delete_from_matrix;
 
         }
-
-
-                        /* if (x == 0) //pierwsza grupa
-                             {
-                                 int entry_size = row.entries_to_delete[y].columns.Count;
-                                 for (int col_num = 0; col_num < entry_size; col_num++)
-                                 {
-                                     if (columns_to_delete.Contains(row.entries_to_delete[y].columns[col_num]))
-                                     {
-                                         entry_size -= 1;
-                                     }
-                                 }
-
-                                 if (best_score == 0 || best_score > entry_size)
-                                 {
-                                     best_score = entry_size;
-                                     best_entry.Add(row.entries_to_delete[y]);
-
-                                     for (int j = 0; j < row.entries_to_delete[y].columns.Count; j++)
-                                     {
-                                         if (!columns_to_delete.Contains(row.entries_to_delete[y].columns[j]))
-                                             columns_to_delete.Add(row.entries_to_delete[y].columns[j]);
-
-                                     }
-                                     //Console.WriteLine("tu1 "  + best_score + ' ' + y +' '+ i);
-                                     y = row.entries_to_delete.Count;
-                                 }
-                             }
-                             else // kazda kolejna grupa
-                             {
-
-                                 Console.WriteLine(x);
-                                 for(int ii = 0; ii<row.entries_to_delete.Count; ii++)
-                                 {
-                                     Console.WriteLine(" start: "+row.entries_to_delete[ii].start + " length: " + row.entries_to_delete[ii].length + " id: " + row.entries_to_delete[ii].id);
-                                 }
-
-                                 //Console.WriteLine(best_entry[best_entry.Count - 1].start);
-                                 if (row.entries_to_delete[y].start != best_entry[best_entry.Count - 1].length + best_entry[best_entry.Count - 1].start)
-                                 {
-                                     int entry_size = row.entries_to_delete[y].columns.Count;
-                                     for (int col_num = 0; col_num < entry_size; col_num++)
-                                     {
-                                         if (columns_to_delete.Contains(row.entries_to_delete[y].columns[col_num]))
-                                         {
-                                             entry_size -= 1;
-                                         }
-                                     }
-
-                                     if (best_score == 0 || best_score > entry_size)
-                                     {
-                                         best_score = entry_size;
-                                         best_entry.Add(row.entries_to_delete[y]);
-                                         Console.WriteLine("del: start: " + row.entries_to_delete[y].start + " length: " + row.entries_to_delete[y].length + " id: " + row.entries_to_delete[y].id);
-
-
-                                         for (int j = 0; j < row.entries_to_delete[y].columns.Count; j++)
-                                         {
-                                             if (!columns_to_delete.Contains(row.entries_to_delete[y].columns[j]))
-                                             {
-                                                 columns_to_delete.Add(row.entries_to_delete[y].columns[j]);
-                                                 //Console.WriteLine("del: start: " + row.entries_to_delete[y].start + " length: " + row.entries_to_delete[y].length + " id: " + row.entries_to_delete[y].id);
-                                                 //Console.WriteLine(row.entries_to_delete[y].columns[j]);
-                                             }
-
-                                         }
-                                         y = row.entries_to_delete.Count;
-                                     }
-                                 }
-                             }
-
-
-                         }
-                     }
-                 }
-             }
-
-             List<int> columns_to_delete_from_matrix = row.Get_columns_to_delete_from_matrix(columns_to_delete);
-
-
-             return columns_to_delete_from_matrix;
-         } */
 
 
        List<int> Get_columns_to_delete(List<Row> rows_object)
@@ -371,67 +276,10 @@ namespace TabuSearchForConsOnesProblem
 
             List<int> columns_to_delete = Get_columns_to_delete(rows_object);
 
-            //int[,] cleaned_matrix = get_cleaned_matrix(columns_to_delete, matrix);
-
-
-
-          /*  Console.Write("Columns to delete: ");
-
-            for(int i =0;i<columns_to_delete.Count; i++)
-            {
-              Console.Write(columns_to_delete[i] + " ");
-            }Console.WriteLine();
-
-            Console.WriteLine("Cmax = " + columns_to_delete.Count);
-            */
-
-          /* for(int i= 0;i<matrix.GetLength(0);i++)
-            {
-                for(int j= 0; j<matrix.GetLength(1);j++)
-                {
-                    if(!columns_to_delete.Contains(j))
-                    {
-                        Console.Write(matrix[i, j] + " ");
-                    }
-                } Console.WriteLine();
-            }
-            */
 
             return columns_to_delete.Count;
 
 
-
-            /*
-            bool result = IsMatrixConsecutiveOnes(cleaned_matrix);
-
-            if (result == false)
-            {
-                Console.Write("Columns to delete: ");
-
-                for (int i = 0; i < columns_to_delete.Count; i++)
-                {
-                    Console.Write(columns_to_delete[i] + " ");
-                }
-
-                Console.WriteLine();
-                Console.WriteLine("Cmax = " + columns_to_delete.Count);
-
-
-
-                for (int i = 0; i < cleaned_matrix.GetLength(1); i++)
-                {
-                    for (int j = 0; j < cleaned_matrix.GetLength(0); j++)
-                    {
-                        Console.Write(cleaned_matrix[i, j] + " ");
-                    }
-
-                    Console.WriteLine();
-                }
-            }
-
-
-            return result;
-            */
         }
 
     }

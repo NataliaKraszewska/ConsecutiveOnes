@@ -54,15 +54,40 @@ namespace TabuSearchForConsOnesProblem
                 }
                 row = new_row;
 
+                //Console.WriteLine("oryginal columns");
+                //for(int i = 0; i <oryginal_columns.Count; i++)
+                //{
+                  //  Console.Write(oryginal_columns[i] + " ");
+                //}Console.WriteLine();
                 List<int> new_columns = new List<int>();
                 for (int i = 0; i < oryginal_columns.Count; i++)
                 {
                     if (!column_to_delete.Contains(i))
                     {
                         new_columns.Add(oryginal_columns[i]);
+                       // if(oryginal_columns[i] < 0)
+                        //{
+                            
+                          //  Console.WriteLine("oryfinal column " + oryginal_columns[i]);
+                        //}
                     }
                 }
+
+               /* Console.WriteLine("new columns");
+                for( int i = 0; i<new_columns.Count; i++)
+                {
+                    Console.Write(new_columns[i] + " ");
+                }Console.WriteLine();
+
+            */
                 columns = new_columns;
+
+              //  Console.WriteLine("columns in row: ");
+                /*for (int i = 0; i < columns.Count; i++)
+                {
+                    Console.Write(columns[i] + " ");
+                }Console.WriteLine();
+                */
                 /*
                 for(int i= 0;i<new_columns.Count;i++)
                 {
@@ -75,10 +100,17 @@ namespace TabuSearchForConsOnesProblem
         public List<int> Get_columns_to_delete_from_matrix(List<int> columns_to_delete)
         {
             List<int> columns_to_delete_from_matrix = new List<int>();
+            /*
+            Console.WriteLine("columns to delete size: " + columns_to_delete.Count);
+            Console.WriteLine("columns size: " + columns.Count);
+            Console.WriteLine("columns to delete indexes:");
+            */
             for(int i=0;i<columns_to_delete.Count;i++)
             {
+                //Console.Write(columns_to_delete[i] + " ");
                 columns_to_delete_from_matrix.Add(columns[columns_to_delete[i]]);
-            }
+            }   //Console.WriteLine();
+            
             return columns_to_delete_from_matrix;
         }
 
@@ -116,11 +148,6 @@ namespace TabuSearchForConsOnesProblem
             List<int> ones_position = Get_ones_position(reverse);
             if(ones_position.Count == 0)
             {
-               for(int i = 0;i < row.Count; i++)
-                {
-                    Console.Write(row[i] + " ");
-                }Console.WriteLine();
-
                 List<Ones_entries> ones_entries_null = new List<Ones_entries>();
                 return ones_entries_null;
             }
@@ -199,9 +226,15 @@ namespace TabuSearchForConsOnesProblem
             {
                 int new_start;
                 new_start = row.Count - (rev_entry_to_delete[i].start + rev_entry_to_delete[i].length);
+
                 bool is_entry_in_list = check_entry_in_list(entry_to_delete, new_start, rev_entry_to_delete[i].length);
                 if (is_entry_in_list == false)
                 {
+                    if(new_start < 0)
+                    {
+                        Console.WriteLine("rev start: " + rev_entry_to_delete[i].start + "rev_len: " + rev_entry_to_delete[i].length + "row count: " + row.Count); 
+                        Console.WriteLine("new_start: "  + new_start);
+                    }
                     entry_to_delete.Add(new Entries_to_delete(new_start, rev_entry_to_delete[i].length, rev_entry_to_delete[i].id));
 
                 }
@@ -289,6 +322,12 @@ namespace TabuSearchForConsOnesProblem
         public List<Entries_to_delete> Column_to_delete(bool reverse)
         {    
             List<Ones_entries> ones_entries = Get_ones_entries(reverse);
+            if(ones_entries.Count == 0)
+            {
+                List<Entries_to_delete> none_entries = new List<Entries_to_delete>();
+                return none_entries;
+
+            }
             //for(int i = 0; i < ones_entries.Count; i++)
             //{
               //  Console.Write(ones_entries[i].start + " " + ones_entries[i].length);
@@ -325,22 +364,38 @@ namespace TabuSearchForConsOnesProblem
                     //Console.WriteLine("tu1");
                     if(seq_len == zeros_length && zeros_length  == next_seq_len)
                     {
-                        entry_to_delete.Add(new Entries_to_delete(seq_start, seq_start + seq_len, i));
+                       // if (seq_start + seq_start + seq_len > 23)
+                         //   Console.WriteLine("tu2");
+                        //if (seq_end + 1 + zeros_length > 23)
+                          //  Console.WriteLine("tu3");
+                       // if (next_seq_start + next_seq_len > 23)
+                         //   Console.WriteLine("tu4");
+                        entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else if(seq_len == zeros_length && zeros_length != next_seq_len)
                     {
-                        entry_to_delete.Add(new Entries_to_delete(seq_start, seq_start + seq_len, i));
+                        if (seq_start < 0)
+                            Console.WriteLine("tu5");
+                        if (seq_end < 0)
+                            Console.WriteLine("tu6");
+                        entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                     }
                     else if(seq_len != zeros_length && zeros_length == next_seq_len)
                     {
+                        if (seq_end + 1 < 0)
+                            Console.WriteLine("tu7");
+                        if (next_seq_start < 0)
+                            Console.WriteLine("tu8");
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else
                     {
+                        if (seq_end < 0)
+                            Console.WriteLine("tu9");
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                     }
                     seq_len += next_seq_len;
@@ -352,17 +407,25 @@ namespace TabuSearchForConsOnesProblem
                     //Console.WriteLine("tu2 " + seq_len + ' ' + next_seq_len + ' ' + zeros_length);
                     if (seq_len == next_seq_len)
                     {
+                        if (seq_start < 0)
+                            Console.WriteLine("tu10");
+                        if (next_seq_start < 0)
+                            Console.WriteLine("tu11");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else if(i==0)
                     {
+                        if (seq_start < 0)
+                            Console.WriteLine("tu12");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         //entry_to_delete.Add(new Entries_to_delete(ones_entries[i-1].start, ones_entries[i-1].start + ones_entries[i-1].length, i));
                     }
                     else
                     {
-                        entry_to_delete.Add(new Entries_to_delete(ones_entries[i - 1].start, ones_entries[i - 1].start + ones_entries[i - 1].length, i));
+                        if (ones_entries[i - 1].start < 0)
+                            Console.WriteLine("tu13");
+                        entry_to_delete.Add(new Entries_to_delete(ones_entries[i - 1].start,  ones_entries[i - 1].length, i));
                     }
                     seq_len = next_seq_len;
                     previous_zero_length = 0;
@@ -382,10 +445,14 @@ namespace TabuSearchForConsOnesProblem
                         int next_zeros_seq_len = (ones_entries[i + 2].start) - (next_seq_end + 1);
                         if(next_seq_len == next_zeros_seq_len)
                         {
+                            if (next_zeros_seq_start < 0)
+                                Console.WriteLine("tu14");
                             entry_to_delete.Add(new Entries_to_delete(next_zeros_seq_start, next_zeros_seq_len, i));
                             //Console.WriteLine(next_zeros_seq_start + " " + next_zeros_seq_len);
                         }
                     }
+                    if (next_seq_start < 0)
+                        Console.WriteLine("tu15");
                     entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     //Console.WriteLine(next_seq_start + " " + next_seq_len);
                     previous_zero_length = zeros_length;

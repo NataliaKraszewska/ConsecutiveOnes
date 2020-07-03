@@ -25,6 +25,18 @@ namespace TabuSearchForConsOnesProblem
 
         public void Get_columns_to_delete()
         {
+            /*if(start < 0 )
+            {
+                Console.WriteLine("columns to del in entries to del: ");
+                Console.WriteLine("start: " + start);
+                for (int i = start; i < start + length; i++)
+                {
+                    Console.Write(i + " ");
+                }
+                Console.WriteLine();
+
+            }*/
+
             for(int i = start; i < start+length; i++)
             {
                 columns.Add(i);
