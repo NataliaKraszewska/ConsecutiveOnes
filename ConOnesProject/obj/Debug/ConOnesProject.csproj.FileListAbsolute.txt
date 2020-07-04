@@ -29,3 +29,4 @@ C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.exe
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.pdb
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.TabuSearchAlgorithmForm.resources
+C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.ColumnToDeleteForm.resources

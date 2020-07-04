@@ -71,12 +71,27 @@
     <Compile Include="AddYourOwnMatrixForm.Designer.cs">
       <DependentUpon>AddYourOwnMatrixForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CmaxEstimation.cs" />
+    <Compile Include="ColumnToDeleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColumnToDeleteForm.Designer.cs">
+      <DependentUpon>ColumnToDeleteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConsecutiveOnesProgramForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConsecutiveOnesProgramForm.Designer.cs">
       <DependentUpon>ConsecutiveOnesProgramForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConsString.cs" />
+    <Compile Include="CurrentMatrix.cs" />
+    <Compile Include="CurrentResult.cs" />
+    <Compile Include="DiversifyingMovements.cs" />
+    <Compile Include="Entries_to_delete.cs" />
+    <Compile Include="GreedyHeuristic.cs" />
+    <Compile Include="MovedColumnAndNeighborhood.cs" />
+    <Compile Include="MoveInMatrix.cs" />
     <Compile Include="IFormsMatrixInformations.cs" />
     <Compile Include="InputMatrix.cs" />
     <Compile Include="MatrixFromFile.cs" />
@@ -87,9 +102,12 @@
     <Compile Include="ModifyMatrixForms.Designer.cs">
       <DependentUpon>ModifyMatrixForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="OnesCount.cs" />
+    <Compile Include="Ones_entries.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomMatrix.cs" />
+    <Compile Include="Row.cs" />
     <Compile Include="TabuSearchAlgorithmForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddYourOwnMatrixForm.resx">
       <DependentUpon>AddYourOwnMatrixForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColumnToDeleteForm.resx">
+      <DependentUpon>ColumnToDeleteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConsecutiveOnesProgramForm.resx">
       <DependentUpon>ConsecutiveOnesProgramForm.cs</DependentUpon>

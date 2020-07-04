@@ -11,5 +11,6 @@ namespace ConOnesProject
         void addRandomMatrix(int width, int height, int  numberOfMistakes, string diffChoice);
         void addMatrixFromText(string text);
         void matrixFilePath(string text);
+        void resultMatrix(int[,] matrix, int cmax, List<int> columnsOrder, List<int> columnsToDelete,int diverse, int neighbornhood, int tabuListSize, int maxCountTheSameResult, string seconds);
     }
 }
