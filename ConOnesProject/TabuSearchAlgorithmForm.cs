@@ -277,6 +277,8 @@ namespace ConOnesProject
             string seconds = "";
             //Console.WriteLine("Input matrix:");
             //ShowMatrix(matrix);
+            Console.WriteLine("tu1");
+
             GreedyHeuristic initialMatrix = new GreedyHeuristic(matrix);
             greedyHeuristicsMatrix = initialMatrix.GreedyHeuristicAlgorythm();
 
@@ -298,14 +300,31 @@ namespace ConOnesProject
             int stepWithoutBetterResultCount = 0;
             int generateDiversifyingMovementsCount = diversifyMatrixCount;
             int NeighbornHoodsCountToVisit = neighborhoodsCount;
+            bool showMatrix = true;
 
             int progresBarMaximumSize = generateDiversifyingMovementsCount;
             progressBar1.Maximum = progresBarMaximumSize;
             progressBar1.Value = 0;
+            int value = result.cmax;
+
+            chart1.Series["Series1"].Points.Clear();
+
+
 
             while (generateDiversifyingMovementsCount != 0)
             {
+                Console.WriteLine("tu2");
                 textBox1.Text = result.cmax.ToString();
+                if(result.cmax < value)
+                {
+                    value = result.cmax;
+                    Thread.Sleep(50);
+                    chart1.Series["Series1"].Points.AddY(value);
+                    chart1.Update();
+                    Application.DoEvents();
+
+                }
+
                 progressBar1.Value = progresBarMaximumSize - generateDiversifyingMovementsCount + 1;
 
                 if (stopTabuAlgorithm)
@@ -320,14 +339,26 @@ namespace ConOnesProject
                     resultMatrix = result.matrix;
                     columnsOrder = result.columnsOrder;
                     columnsToDelete = result.columnToDelete;
-                    menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount, seconds);
+                    if (resultMatrix.GetLength(0) > 50 && resultMatrix.GetLength(1) > 50)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Matrix is big. Do you want to show matrix in program?", "Do you want to show matrix?", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No)
+                        {
+                            showMatrix = false;
+                        }
+                    }
+                    menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount, seconds, showMatrix);
                     this.Close();
 
                     Thread.CurrentThread.Abort();
                 }
 
                 int tabuListMaxSize = tabuListSize;
+                Console.Write(NeighbornHoodsCountToVisit);
+
                 currentMatrix = ChangeInMatrix(currentMatrix, TabuList); // robimy ruch
+                Console.Write(NeighbornHoodsCountToVisit);
+
                 NeighbornHoodsCountToVisit -= 1;
                 cmaxEstimator = new CmaxEstimation(currentMatrix.newMatrix); //obliczamy cmax
                 cmaxValue = cmaxEstimator.GetCmaxValue();
@@ -357,6 +388,7 @@ namespace ConOnesProject
 
                 if (stepWithoutBetterResultCount == maxStepWithoutBetterResult || NeighbornHoodsCountToVisit == 0) //jesli nie ma poprawy
                 {
+                    Console.WriteLine("tu3");
                     int numberOfColumnToChange = (int)(0.2 * matrix.GetLength(1));
                     currentMatrix = GenerateDiversifyingMovements(currentMatrix, numberOfColumnToChange); //robimy nowe rozwiazanie poczatkowe 
                     NeighbornHoodsCountToVisit = neighborhoodsCount;
@@ -389,7 +421,17 @@ namespace ConOnesProject
             resultMatrix = result.matrix;
             columnsOrder = result.columnsOrder;
             columnsToDelete = result.columnToDelete;
-            menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount,seconds);
+
+
+            if(resultMatrix.GetLength(0) > 50 && resultMatrix.GetLength(1) > 50)
+            {
+                DialogResult dialogResult = MessageBox.Show("Matrix is big. Do you want to show matrix in program?", "Do you want to show matrix?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    showMatrix = false;
+                }
+            }
+            menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount,seconds, showMatrix);
 
             Thread.Sleep(900);
 
@@ -407,10 +449,46 @@ namespace ConOnesProject
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            diversifyMatrixCount = Int32.Parse(textBox2.Text);
-            neighborhoodsCount = Int32.Parse(textBox3.Text);
-            theSameResultCount = Int32.Parse(textBox4.Text);
-            tabuListSize = Int32.Parse(textBox5.Text);
+            int i;
+            if (!int.TryParse(textBox2.Text, out i)  || textBox2.Text == "0")
+            {
+                MessageBox.Show("Add value to all fields!!!");
+                return;
+            }
+            else
+            {
+                diversifyMatrixCount = Convert.ToInt32(textBox2.Text);
+            }
+
+            if (!int.TryParse(textBox3.Text, out i) || textBox3.Text == "0")
+            {
+                MessageBox.Show("Add int value to all fields!!!");
+                return;
+            }
+            else
+            {
+                neighborhoodsCount = Int32.Parse(textBox3.Text);
+            }
+
+            if (!int.TryParse(textBox4.Text, out i) || textBox4.Text == "0")
+            {
+                MessageBox.Show("Add int value to all fields!!!");
+                return;
+            }
+            else
+            {
+                theSameResultCount = Int32.Parse(textBox4.Text);
+            }
+
+            if (!int.TryParse(textBox5.Text, out i) || textBox5.Text == "0")
+            {
+                MessageBox.Show("Add int value to all fields!!!");
+                return;
+            }
+            else
+            {
+                tabuListSize = Int32.Parse(textBox5.Text);
+            }
 
             CheckForIllegalCrossThreadCalls = false;
             stopTabuAlgorithm = false;

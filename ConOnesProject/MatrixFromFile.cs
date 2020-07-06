@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using System.Text.RegularExpressions;
 
 namespace ConOnesProject
 {
@@ -22,21 +22,50 @@ namespace ConOnesProject
         }
 
 
-        public void ReadFile()
+        public int[,] ReadFile()
         {
-            string[] lines = File.ReadAllLines(filePath);
-            height = lines.Length;
-            width = lines[0].Split(' ').Length;
-            matrix = new int[height, width];
-
-            for (int i = 0; i < height; i++)
+            try
             {
-                string[] line = lines[i].Split(' ');
-                for (int j = 0; j < width; j++)
+                File.ReadAllLines(filePath);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            string[] lines = File.ReadAllLines(filePath);
+
+                height = lines.Length;
+                width = Regex.Replace(lines[0], @"\s+", "").Length;
+                matrix = new int[height, width];
+
+            try
+            {
+                for (int i = 0; i < height; i++)
                 {
-                    matrix[i, j] = Convert.ToInt32(line[j]);
+                    List<char> line = new List<char>();
+                    string l = Regex.Replace(lines[i], @"\s+", "");
+                    foreach (char x in l)
+                    {
+                        if (x != '0' && x != '1')
+                        {
+                            return null;
+                        }
+                        line.Add(x);
+                    }
+                    for (int j = 0; j < width; j++)
+                    {
+                        matrix[i, j] = line[j] - '0';
+                    }
                 }
             }
+            catch(ArgumentOutOfRangeException e)
+            {
+                return null;
+            }
+            
+
+            return matrix;
         }
     }
 }

@@ -564,6 +564,7 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(145, 82);
@@ -592,11 +593,12 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(0, 0);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(116, 82);
             this.button3.TabIndex = 0;
-            this.button3.Text = "SHOW RANDOM RESULT";
+            this.button3.Text = "SHOW RANDOM INPUT MATRIX BEFORE MIXING COLUMNS";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -620,16 +622,19 @@
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(0, 0);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(109, 82);
             this.button4.TabIndex = 0;
             this.button4.Text = "MODIFY INPUT MATRIX";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // button7
             // 
             this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button7.Enabled = false;
             this.button7.Location = new System.Drawing.Point(0, 0);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(115, 82);
@@ -753,12 +758,14 @@
             // button6
             // 
             this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(0, 0);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(246, 82);
             this.button6.TabIndex = 0;
             this.button6.Text = "SHOW COLUMNS TO DELETE AND MATRIX WITHOUT COLUMNS TO DELETE";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // panel53
             // 
@@ -772,12 +779,14 @@
             // button8
             // 
             this.button8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(0, 0);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(251, 82);
             this.button8.TabIndex = 0;
-            this.button8.Text = "SHOW REPORT";
+            this.button8.Text = "SAVE REPORT TO OUTPUT FILE";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // panel41
             // 
@@ -1190,6 +1199,7 @@
             // button5
             // 
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(0, 0);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(262, 51);

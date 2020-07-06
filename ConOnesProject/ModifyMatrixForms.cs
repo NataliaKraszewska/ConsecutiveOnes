@@ -49,8 +49,21 @@ namespace ConOnesProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string text = richTextBox1.Text;
-            menuForm.addMatrixFromText(text);
+            string matrixText = richTextBox1.Text;
+            MatrixFromText newMatrix = new MatrixFromText(matrixText);
+
+            if (newMatrix.matrix == null)
+            {
+                MessageBox.Show("All rows and columns must have the same size and matrix must contains only 0 and 1 values!");
+                return;
+            }
+            if (newMatrix.matrix.GetLength(0) == 1 && newMatrix.matrix.GetLength(1) == 1)
+            {
+                MessageBox.Show("Matrix is too small!");
+                return;
+
+            }
+            menuForm.addMatrixFromText(matrixText);
             this.Close();
         }
 

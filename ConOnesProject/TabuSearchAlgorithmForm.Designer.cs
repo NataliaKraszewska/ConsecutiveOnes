@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,6 +39,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel22 = new System.Windows.Forms.Panel();
             this.panel23 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -72,6 +77,8 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel22.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
@@ -161,6 +168,7 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.panel25);
             this.panel7.Controls.Add(this.panel22);
             this.panel7.Controls.Add(this.panel14);
             this.panel7.Controls.Add(this.panel8);
@@ -169,6 +177,32 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(800, 373);
             this.panel7.TabIndex = 1;
+            // 
+            // panel25
+            // 
+            this.panel25.Controls.Add(this.chart1);
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel25.Location = new System.Drawing.Point(265, 251);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(535, 122);
+            this.panel25.TabIndex = 3;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(0, 0);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(535, 122);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
             // 
             // panel22
             // 
@@ -492,6 +526,8 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
+            this.panel25.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel22.ResumeLayout(false);
             this.panel23.ResumeLayout(false);
             this.panel23.PerformLayout();
@@ -567,5 +603,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel18;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace ConOnesProject
 {
-    class InputMatrix
+    public class InputMatrix
     {
         public int[,] rndResultlMatrix;
         public int[,] inputMatrix;
-        int[] columnPosition;
+        public int[] columnPosition;
         public int width;
         public int height;
         public int numerOfColumnsToDeleteForMixedColumnsMatrix;
         public int numerOfColumnsToDeleteForOptimalMatrix;
         public int numberOfMistakes;
         public int percentageLengthStringOfOnes;
+        public string howMatrixIsGenerated;
 
-
-        public InputMatrix(int [,] a_matrix)
+        public InputMatrix(int [,] a_matrix, string in_howMatrixIsGenerated)
         {
             inputMatrix = a_matrix;
             height = a_matrix.GetLength(0);
@@ -28,10 +28,11 @@ namespace ConOnesProject
             numerOfColumnsToDeleteForMixedColumnsMatrix = GetNumberOfColumnsToDelete(inputMatrix);
             numberOfMistakes = 0;
             percentageLengthStringOfOnes = 0;
+            howMatrixIsGenerated = in_howMatrixIsGenerated;
         }
 
 
-        public InputMatrix(int[,] a_matrix, int a_numberOfMistakes, int a_percentageLengthStringOfOnes)
+        public InputMatrix(int[,] a_matrix, int a_numberOfMistakes, int a_percentageLengthStringOfOnes, string in_howMatrixIsGenerated)
         {
             rndResultlMatrix = a_matrix;
             height = a_matrix.GetLength(0);
@@ -42,6 +43,7 @@ namespace ConOnesProject
             numerOfColumnsToDeleteForMixedColumnsMatrix = GetNumberOfColumnsToDelete(inputMatrix);
             numberOfMistakes = a_numberOfMistakes;
             percentageLengthStringOfOnes = a_percentageLengthStringOfOnes;
+            howMatrixIsGenerated = in_howMatrixIsGenerated;
         }
 
 

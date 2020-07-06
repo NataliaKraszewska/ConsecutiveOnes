@@ -33,18 +33,27 @@ namespace ConOnesProject
 
             matrix = new int[height, width];
             int i = 0;
-            foreach (string line in textFromUser.Split('\n'))
+            try
             {
-                string strippedLine = Regex.Replace(line, @"\s+", "");
-                for (int j = 0; j < strippedLine.Length; j++)
+                foreach (string line in textFromUser.Split('\n'))
                 {
-                    matrix[i, j] = (int)(strippedLine[j] - '0');
+                    string strippedLine = Regex.Replace(line, @"\s+", "");
+                    for (int j = 0; j < strippedLine.Length; j++)
+                    {
+                        matrix[i, j] = (int)(strippedLine[j] - '0');
+                    }
+                    if (line.Length != 0)
+                        i++;
                 }
-                if (line.Length != 0)
-                    i++;
+                return matrix;
+
+            }
+            catch(IndexOutOfRangeException e)
+            {
+                return null;
             }
 
-            return matrix;
+            
         }
     }
 }

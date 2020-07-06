@@ -87,6 +87,10 @@ namespace ConOnesProject
         {
             Random rPosition = new Random();
             int mistakesCount = 0;
+            if(width < 3)
+            {
+                return;
+            }
             while (mistakesCount != numberOfMistakes)
             {
                 int randomRow = rPosition.Next(height);
