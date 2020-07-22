@@ -32,3 +32,41 @@ C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.ColumnToDeleteForm.resources
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.SaveMatrixInFileForm.resources
 C:\Users\natkr\source\repos\repository\ConsecutiveOnes\ConOnesProject\obj\Debug\ConOnesProject.ReportForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\bin\Debug\ConOnesProject.exe.config
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\bin\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\bin\Debug\ConOnesProject.pdb
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.csprojAssemblyReference.cache
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixFromFileForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixMenuForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.AddRandomMatrixForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.AddYourOwnMatrixForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.ColumnToDeleteForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.ConsecutiveOnesProgramForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.ModifyMatrixForms.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.Properties.Resources.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.ReportForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.SaveMatrixInFileForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.TabuSearchAlgorithmForm.resources
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.csproj.GenerateResource.cache
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.csproj.CoreCompileInputs.cache
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\oficjalna wersja\ConOnesProject\obj\Debug\ConOnesProject.pdb
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\bin\Debug\ConOnesProject.exe.config
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\bin\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\bin\Debug\ConOnesProject.pdb
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.csprojAssemblyReference.cache
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixFromFileForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.AddMatrixMenuForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.AddRandomMatrixForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.AddYourOwnMatrixForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.ColumnToDeleteForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.ConsecutiveOnesProgramForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.ModifyMatrixForms.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.Properties.Resources.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.ReportForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.SaveMatrixInFileForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.TabuSearchAlgorithmForm.resources
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.csproj.GenerateResource.cache
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.csproj.CoreCompileInputs.cache
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.exe
+C:\Users\natkr\source\repos\ConsecutiveOnesProblem\ConOnesProject\obj\Debug\ConOnesProject.pdb

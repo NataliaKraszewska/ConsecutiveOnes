@@ -16,69 +16,12 @@ namespace ConOnesProject
         public GreedyHeuristic(int[,] inputMatrix)
         {
             matrix = inputMatrix;
-            GreedyHeuristicAlgorythm();
+            //GreedyHeuristicAlgorythm();
         }
+        
+        
 
-
-        bool IsMatrixConsecutiveOnes(int[,] matrix)
-        {
-            int matrixWidth = matrix.GetLength(1);
-            int matrixHeight = matrix.GetLength(0);
-            for (int i = 0; i < matrixHeight; i++)
-            {
-                bool foundOne = false;
-                bool foundZeroAfterOne = false;
-
-                for (int j = 0; j < matrixWidth; j++)
-                {
-                    if (!foundOne && matrix[i, j] == 1)
-                    {
-                        foundOne = true;
-                    }
-                    if (foundOne && matrix[i, j] == 0)
-                    {
-                        foundZeroAfterOne = true;
-                    }
-                    if (foundZeroAfterOne && matrix[i, j] == 1)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-
-        bool IsColumnMatchesTheMatrix(int[,] matrix, int column, List<int> columnsOrder, int checkPointOnMatrix)
-        {
-            if (columnsOrder.Count - checkPointOnMatrix < 2)
-            {
-                return true;
-            }
-            else
-            {
-                int[,] matrixToCheck;
-                int matrixHeight = matrix.GetLength(0);
-                matrixToCheck = new int[matrixHeight, columnsOrder.Count + 1];
-
-                for (int i = 0; i < matrixHeight; i++)
-                {
-                    for (int j = checkPointOnMatrix; j < columnsOrder.Count; j++)
-                    {
-                        matrixToCheck[i, j] = matrix[i, columnsOrder[j]];
-                    }
-                }
-                for (int i = 0; i < matrixHeight; i++)
-                {
-                    matrixToCheck[i, matrixToCheck.GetLength(1) - 1] = matrix[i, column];
-                }
-
-                return IsMatrixConsecutiveOnes(matrixToCheck);
-            }
-        }
-
-
-        List<int> SortColumnsToAddByNumberOfOnes()
+        List<int> SortColumnsToAddByNumberOfOnes(int [,] matrix)
         {
             int matrixHeight = matrix.GetLength(0);
             int matrixWidth = matrix.GetLength(1);
@@ -110,6 +53,69 @@ namespace ConOnesProject
             return sortedColumns;
         }
 
+
+
+        int GetNumberOfOpositeOnes(List <int> columnsToAdd, List<int> column, int index)
+        {
+            List<int> columnToAdd = new List<int>(); // przepisujemy kolumne
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                columnToAdd.Add(matrix[i, columnsToAdd[index]]);
+            }
+
+            int onesCount = 0;
+            for(int i = 0; i< columnToAdd.Count(); i++)
+            {
+                if (columnToAdd[i] == 1 && column[i] == 1)
+                    onesCount++;
+                
+            }
+
+            return onesCount;
+        }
+
+
+
+        int FindColumnToAdd(List <int> columnsToAdd, List <int> columnsOrder)
+        {
+            int columnWithMostOnesInTheSamePosition = 0;
+            int numberOfOpositeOnes = 0;
+            int columnIndex = columnsOrder[columnsOrder.Count() - 1];
+
+            List<int> column = new List<int>(); // przepisujemy kolumne
+            for(int i = 0; i< matrix.GetLength(0); i++)
+            {
+                column.Add(matrix[i, columnIndex]);
+            }
+
+            if(columnsToAdd.Count() == 1)
+            {
+                return columnsToAdd[0]; //jesli ostatnia kolumna zostala
+            }
+
+            bool foundColumn = false;
+
+            for(int i = 0; i < columnsToAdd.Count; i++) // jesli sa kolumny do wyboru to wybierz te o najwiekszej liczbie 1 obok kolumny ostatniej
+            {
+                int tmp = GetNumberOfOpositeOnes(columnsToAdd, column, i);
+
+                if (tmp > numberOfOpositeOnes && !columnsOrder.Contains(columnsToAdd[i]))
+                {
+                    numberOfOpositeOnes = tmp;
+                    columnWithMostOnesInTheSamePosition = columnsToAdd[i];
+                    foundColumn = true;
+                }
+
+            }
+
+            if(!foundColumn)
+                return  columnsToAdd[0];
+
+            return columnWithMostOnesInTheSamePosition;
+        }
+
+
+
         public int[,] GreedyHeuristicAlgorythm()
         {
             int matrixHeight = matrix.GetLength(0);
@@ -119,41 +125,25 @@ namespace ConOnesProject
             Random r = new Random();
 
 
-            List<int> columnsOrderedByNumberOfOnes = SortColumnsToAddByNumberOfOnes();
+            List<int> columnsOrderedByNumberOfOnes = SortColumnsToAddByNumberOfOnes(matrix);
             int firstColumn = columnsOrderedByNumberOfOnes[0];
-            columnsToAdd.Add(firstColumn);
-            columnsOrder = columnsOrderedByNumberOfOnes;
 
-            int numberOfColumnsToAdd = columnsToAdd.Count;
-            int checkPointOnMatrix = 0;
-            //dodajemy kolejno kolumny do rozwiazania
-            for (int i = 0; i < numberOfColumnsToAdd; i++)
+            columnsOrderedByNumberOfOnes.Remove(columnsOrderedByNumberOfOnes[0]);
+
+            columnsToAdd = columnsOrderedByNumberOfOnes;
+            columnsOrder.Add(firstColumn);
+
+            int columnsToAddCount = columnsOrderedByNumberOfOnes.Count();
+
+            for(int i = 0; i< columnsToAddCount; i++)
             {
-                bool foundColumnWhichMatchesTheMatrix = false;
-                for (int columnIndex = 0; columnIndex < columnsToAdd.Count; columnIndex++)
-                {
-                    if (!columnsOrder.Contains(columnsToAdd[columnIndex]) && IsColumnMatchesTheMatrix(matrix, columnsToAdd[columnIndex], columnsOrder, checkPointOnMatrix))
-                    {//jeli macierz spelnia warunek cons1 po dodaniu kolumny
-                        columnsOrder.Add(columnsToAdd[columnIndex]);
-                        foundColumnWhichMatchesTheMatrix = true;
-                        break;
-                    }
-                }
-
-                for (int columnIndex = 0; columnIndex < columnsOrder.Count; columnIndex++) //czyscimy liste kandydatow na macierze z listy
-                    columnsToAdd.Remove(columnsOrder[columnIndex]);
-
-                if (!foundColumnWhichMatchesTheMatrix)//jesli nie spelnia to bierzemy losowa i szukamy od nowa
-                {
-                    columnsOrderedByNumberOfOnes = SortColumnsToAddByNumberOfOnes();
-                    firstColumn = columnsOrderedByNumberOfOnes[0];
-                    columnsToAdd.Add(firstColumn);
-
-                    checkPointOnMatrix = columnsOrder.Count;
-                }
+                int columnIndex = FindColumnToAdd(columnsToAdd, columnsOrder);
+                columnsOrder.Add(columnIndex);
+                columnsToAdd.Remove(columnIndex);
             }
 
             greedyHeuristicsMatrix = new int[matrixHeight, matrixWidth];
+
             for (int i = 0; i < matrixHeight; i++)
             {
                 for (int j = 0; j < matrixWidth; j++)

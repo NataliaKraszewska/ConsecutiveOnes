@@ -51,6 +51,8 @@
             this.panel13 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.splitContainer6 = new System.Windows.Forms.SplitContainer();
             this.label7 = new System.Windows.Forms.Label();
@@ -71,17 +73,11 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.panel51 = new System.Windows.Forms.Panel();
-            this.splitContainer11 = new System.Windows.Forms.SplitContainer();
-            this.panel52 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.panel53 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.panel42 = new System.Windows.Forms.Panel();
-            this.panel56 = new System.Windows.Forms.Panel();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.splitContainer11 = new System.Windows.Forms.SplitContainer();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.panel24 = new System.Windows.Forms.Panel();
             this.panel50 = new System.Windows.Forms.Panel();
             this.textBox11 = new System.Windows.Forms.TextBox();
@@ -156,6 +152,8 @@
             this.panel12.SuspendLayout();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
             this.splitContainer7.SuspendLayout();
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
@@ -181,16 +179,10 @@
             this.panel16.SuspendLayout();
             this.panel17.SuspendLayout();
             this.panel25.SuspendLayout();
-            this.panel51.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer11)).BeginInit();
             this.splitContainer11.Panel1.SuspendLayout();
             this.splitContainer11.Panel2.SuspendLayout();
             this.splitContainer11.SuspendLayout();
-            this.panel52.SuspendLayout();
-            this.panel53.SuspendLayout();
-            this.panel41.SuspendLayout();
-            this.panel42.SuspendLayout();
-            this.panel56.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel50.SuspendLayout();
             this.panel36.SuspendLayout();
@@ -310,7 +302,6 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 170);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(497, 235);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
@@ -477,9 +468,36 @@
             this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer7.Location = new System.Drawing.Point(0, 53);
             this.splitContainer7.Name = "splitContainer7";
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.label8);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.textBox5);
             this.splitContainer7.Size = new System.Drawing.Size(253, 47);
             this.splitContainer7.SplitterDistance = 116;
             this.splitContainer7.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(98, 26);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Number of columns\r\nto delete:";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox5.Location = new System.Drawing.Point(0, 0);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(133, 20);
+            this.textBox5.TabIndex = 0;
             // 
             // panel11
             // 
@@ -701,6 +719,7 @@
             // 
             // panel17
             // 
+            this.panel17.Controls.Add(this.richTextBox2);
             this.panel17.Controls.Add(this.panel25);
             this.panel17.Controls.Add(this.panel24);
             this.panel17.Controls.Add(this.panel18);
@@ -710,24 +729,23 @@
             this.panel17.Size = new System.Drawing.Size(501, 487);
             this.panel17.TabIndex = 0;
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(0, 170);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(501, 235);
+            this.richTextBox2.TabIndex = 3;
+            this.richTextBox2.Text = "";
+            // 
             // panel25
             // 
-            this.panel25.Controls.Add(this.panel51);
-            this.panel25.Controls.Add(this.panel41);
-            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel25.Location = new System.Drawing.Point(0, 170);
+            this.panel25.Controls.Add(this.splitContainer11);
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel25.Location = new System.Drawing.Point(0, 405);
             this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(501, 317);
+            this.panel25.Size = new System.Drawing.Size(501, 82);
             this.panel25.TabIndex = 2;
-            // 
-            // panel51
-            // 
-            this.panel51.Controls.Add(this.splitContainer11);
-            this.panel51.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel51.Location = new System.Drawing.Point(0, 235);
-            this.panel51.Name = "panel51";
-            this.panel51.Size = new System.Drawing.Size(501, 82);
-            this.panel51.TabIndex = 1;
             // 
             // splitContainer11
             // 
@@ -737,23 +755,14 @@
             // 
             // splitContainer11.Panel1
             // 
-            this.splitContainer11.Panel1.Controls.Add(this.panel52);
+            this.splitContainer11.Panel1.Controls.Add(this.button6);
             // 
             // splitContainer11.Panel2
             // 
-            this.splitContainer11.Panel2.Controls.Add(this.panel53);
+            this.splitContainer11.Panel2.Controls.Add(this.button8);
             this.splitContainer11.Size = new System.Drawing.Size(501, 82);
-            this.splitContainer11.SplitterDistance = 246;
+            this.splitContainer11.SplitterDistance = 244;
             this.splitContainer11.TabIndex = 0;
-            // 
-            // panel52
-            // 
-            this.panel52.Controls.Add(this.button6);
-            this.panel52.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel52.Location = new System.Drawing.Point(0, 0);
-            this.panel52.Name = "panel52";
-            this.panel52.Size = new System.Drawing.Size(246, 82);
-            this.panel52.TabIndex = 0;
             // 
             // button6
             // 
@@ -761,20 +770,11 @@
             this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(0, 0);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(246, 82);
+            this.button6.Size = new System.Drawing.Size(244, 82);
             this.button6.TabIndex = 0;
             this.button6.Text = "SHOW COLUMNS TO DELETE AND MATRIX WITHOUT COLUMNS TO DELETE";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
-            // panel53
-            // 
-            this.panel53.Controls.Add(this.button8);
-            this.panel53.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel53.Location = new System.Drawing.Point(0, 0);
-            this.panel53.Name = "panel53";
-            this.panel53.Size = new System.Drawing.Size(251, 82);
-            this.panel53.TabIndex = 0;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button8
             // 
@@ -782,48 +782,11 @@
             this.button8.Enabled = false;
             this.button8.Location = new System.Drawing.Point(0, 0);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(251, 82);
+            this.button8.Size = new System.Drawing.Size(253, 82);
             this.button8.TabIndex = 0;
             this.button8.Text = "SAVE REPORT TO OUTPUT FILE";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // panel41
-            // 
-            this.panel41.Controls.Add(this.panel42);
-            this.panel41.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel41.Location = new System.Drawing.Point(0, 0);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(501, 235);
-            this.panel41.TabIndex = 0;
-            // 
-            // panel42
-            // 
-            this.panel42.Controls.Add(this.panel56);
-            this.panel42.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel42.Location = new System.Drawing.Point(0, 0);
-            this.panel42.Name = "panel42";
-            this.panel42.Size = new System.Drawing.Size(501, 235);
-            this.panel42.TabIndex = 0;
-            // 
-            // panel56
-            // 
-            this.panel56.Controls.Add(this.richTextBox2);
-            this.panel56.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel56.Location = new System.Drawing.Point(0, 0);
-            this.panel56.Name = "panel56";
-            this.panel56.Size = new System.Drawing.Size(501, 235);
-            this.panel56.TabIndex = 0;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(501, 235);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
             // panel24
             // 
@@ -881,7 +844,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(131, 39);
             this.label12.TabIndex = 0;
-            this.label12.Text = "How many the same \r\nresults should be found to \r\ndiversify the result matrix:";
+            this.label12.Text = "How many the same \r\nresults should be found to \r\nrestart search procedure:";
             // 
             // panel28
             // 
@@ -993,9 +956,9 @@
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(0, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(98, 39);
+            this.label10.Size = new System.Drawing.Size(111, 39);
             this.label10.TabIndex = 0;
-            this.label10.Text = "How many times \r\nneighborhoods are \r\nsearched:";
+            this.label10.Text = "How many times\r\nthe search procedure \r\nmust be restarted:";
             // 
             // panel27
             // 
@@ -1049,9 +1012,10 @@
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(0, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(105, 39);
+            this.label9.Size = new System.Drawing.Size(119, 52);
             this.label9.TabIndex = 0;
-            this.label9.Text = "How many times the \r\nalgorithm diversifies \r\nthe result matrix:";
+            this.label9.Text = "How many percentages\r\nof maximum movements\r\nare added to the matrix\r\nto diversify" +
+    " it.";
             // 
             // panel30
             // 
@@ -1278,6 +1242,10 @@
             this.panel12.PerformLayout();
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel1.PerformLayout();
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            this.splitContainer7.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
             this.splitContainer7.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
@@ -1306,16 +1274,10 @@
             this.panel16.ResumeLayout(false);
             this.panel17.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
-            this.panel51.ResumeLayout(false);
             this.splitContainer11.Panel1.ResumeLayout(false);
             this.splitContainer11.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer11)).EndInit();
             this.splitContainer11.ResumeLayout(false);
-            this.panel52.ResumeLayout(false);
-            this.panel53.ResumeLayout(false);
-            this.panel41.ResumeLayout(false);
-            this.panel42.ResumeLayout(false);
-            this.panel56.ResumeLayout(false);
             this.panel24.ResumeLayout(false);
             this.panel50.ResumeLayout(false);
             this.panel50.PerformLayout();
@@ -1370,7 +1332,6 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Panel panel9;
@@ -1400,39 +1361,41 @@
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.SplitContainer splitContainer12;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.Panel panel41;
-        private System.Windows.Forms.Panel panel42;
+        private System.Windows.Forms.SplitContainer splitContainer11;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Panel panel24;
-        private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Panel panel30;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Panel panel23;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Panel panel50;
+        private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Panel panel36;
         private System.Windows.Forms.Panel panel48;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel panel28;
         private System.Windows.Forms.Panel panel49;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Panel panel35;
         private System.Windows.Forms.Panel panel47;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel26;
         private System.Windows.Forms.Panel panel46;
+        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Panel panel34;
         private System.Windows.Forms.Panel panel44;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel27;
         private System.Windows.Forms.Panel panel45;
+        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Panel panel33;
         private System.Windows.Forms.Panel panel43;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel30;
         private System.Windows.Forms.Panel panel40;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Panel panel32;
@@ -1444,20 +1407,15 @@
         private System.Windows.Forms.Panel panel31;
         private System.Windows.Forms.Panel panel37;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Panel panel56;
-        private System.Windows.Forms.SplitContainer splitContainer12;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panel51;
-        private System.Windows.Forms.SplitContainer splitContainer11;
-        private System.Windows.Forms.Panel panel52;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Panel panel53;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.Panel panel23;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 

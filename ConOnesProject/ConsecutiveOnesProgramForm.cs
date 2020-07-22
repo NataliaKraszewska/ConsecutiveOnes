@@ -26,6 +26,7 @@ namespace ConOnesProject
         private void button1_Click_1(object sender, EventArgs e)
         {
             textBox6.Text = "";
+            //textBox5.Text = "";
             textBox7.Text = "";
             textBox8.Text = "";
             textBox9.Text = "";
@@ -48,15 +49,20 @@ namespace ConOnesProject
 
         public void AddMatrixToRichTextBox(int[,] matrix)
         {
-            int matrixHeight = matrix.GetLength(0);
-            int matrixWidth = matrix.GetLength(1);
-            for (int i = 0; i < matrixHeight; i++)
+            if (matrix == null)
+                richTextBox1.Text = "";
+            else
             {
-                for (int j = 0; j < matrixWidth; j++)
+                int matrixHeight = matrix.GetLength(0);
+                int matrixWidth = matrix.GetLength(1);
+                for (int i = 0; i < matrixHeight; i++)
                 {
-                    richTextBox1.Text += matrix[i, j].ToString() + " ";
+                    for (int j = 0; j < matrixWidth; j++)
+                    {
+                        richTextBox1.Text += matrix[i, j].ToString() + " ";
+                    }
+                    richTextBox1.Text += "\n";
                 }
-                richTextBox1.Text += "\n";
             }
         }
 
@@ -91,6 +97,40 @@ namespace ConOnesProject
             return newMatrix.matrix;
         }
 
+        //http://csharphelper.com/blog/2014/07/randomize-arrays-in-c/
+        public static void Randomize<T>(T[] items)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < items.Length - 1; i++)
+            {
+                int j = rand.Next(i, items.Length);
+                T temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+        }
+
+
+        int[,] MixRowsInMatrix(int[,] matrix)
+        {
+            int width = matrix.GetLength(1);
+            int height = matrix.GetLength(0);
+
+            int[] rowPosition = Enumerable.Range(0, width).ToArray();
+            Randomize(rowPosition);
+
+            int[,] tmpMatrix = new int[height, width];
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    tmpMatrix[i, j] = matrix[i, rowPosition[j]];
+                }
+            }
+            return tmpMatrix;
+        }
+
 
         void CleanTextBoxes()
         {
@@ -120,6 +160,7 @@ namespace ConOnesProject
                 //textBox5.Text = (isOptimalMatrix) ? this.inputMatrix.numerOfColumnsToDeleteForOptimalMatrix.ToString() : this.inputMatrix.numerOfColumnsToDeleteForMixedColumnsMatrix.ToString();
         }
 
+
         void EnabledButtonsAfterAddingInputMatrix()
         {
             button2.Enabled = true;
@@ -130,28 +171,51 @@ namespace ConOnesProject
             button8.Enabled = false;
         }
 
+
         void IFormsMatrixInformations.addRandomMatrix(int width, int height, int numberOfMistakes, string lenChoice, bool showMatrix)
         {
             button3.Enabled = true;
+            button3.Click += button3_Click;
             EnabledButtonsAfterAddingInputMatrix();
             int percentageLen = Convert.ToInt32(lenChoice.Substring(0, lenChoice.Length - 1));
             int[,] matrix = GenerateRandomMatrix(width, height, numberOfMistakes, percentageLen);
             inputMatrix = new InputMatrix(matrix, numberOfMistakes, percentageLen, "random");
             SetValuesInTextBoxes(true);
+
+            CmaxEstimation cmax = new CmaxEstimation(matrix);
+            textBox5.Text = cmax.GetCmaxValue().ToString();
+
             if (showMatrix)
-                AddMatrixToRichTextBox(matrix);
+                AddMatrixToRichTextBox(inputMatrix.inputMatrix);
         }
 
 
-        void IFormsMatrixInformations.addMatrixFromText(string text)
+        void IFormsMatrixInformations.addMatrixFromText(string text, string type)
         {
             EnabledButtonsAfterAddingInputMatrix();
             richTextBox1.Text = text;
             int[,] matrix = ReadMatrixFromUserText(text);
-            inputMatrix = new InputMatrix(matrix, "text");
-            SetValuesInTextBoxes(false);
-            AddMatrixToRichTextBox(matrix);
-            button3.Click -= button3_Click;
+
+            if (type == "rndResultMatrix")
+            {
+
+               int[,] mixed_matrix = MixRowsInMatrix(matrix);
+                inputMatrix = new InputMatrix(mixed_matrix, "text");
+                SetValuesInTextBoxes(false);
+                AddMatrixToRichTextBox(mixed_matrix);
+                CmaxEstimation cmax = new CmaxEstimation(mixed_matrix);
+                textBox5.Text = cmax.GetCmaxValue().ToString();
+                button3.Enabled = false;
+            }
+            else
+            {
+                inputMatrix = new InputMatrix(matrix, "text");
+                SetValuesInTextBoxes(false);
+                AddMatrixToRichTextBox(matrix);
+                CmaxEstimation cmax = new CmaxEstimation(matrix);
+                textBox5.Text = cmax.GetCmaxValue().ToString();
+                button3.Enabled = false;
+            }
         }
 
 
@@ -164,28 +228,34 @@ namespace ConOnesProject
             SetValuesInTextBoxes(false);
             if (showMatrix)
                 AddMatrixToRichTextBox(matrix);
-            button3.Click -= button3_Click;
+
+            CmaxEstimation cmax = new CmaxEstimation(matrix);
+            textBox5.Text = cmax.GetCmaxValue().ToString();
+
+            button3.Enabled = false;
         }
 
-        void IFormsMatrixInformations.resultMatrix(int[,] matrix, int cmax, List<int> columnsOrder, List<int> columnsToDelete, int diverse, int neighborhood, int tabuListSize, int maxCountTheSameResult, string seconds, bool showMatrix)
+
+        void IFormsMatrixInformations.resultMatrix(int[,] matrix, int cmax, List<int> columnsOrder, List<int> columnsToDelete, int divStepsVal, int newResultCount, int tabuListSize, int maxCountTheSameResult, string seconds, bool showMatrix, int percentageOfDivSteps)
         {
             button6.Enabled = true;
             button8.Enabled = true;
             button4.Enabled = false;
 
-            result = new ResultMatrix(matrix, cmax, columnsOrder, columnsToDelete, diverse, neighborhood, tabuListSize, maxCountTheSameResult, seconds); ;
+            result = new ResultMatrix(matrix, cmax, columnsOrder, columnsToDelete, divStepsVal, newResultCount, tabuListSize, maxCountTheSameResult, seconds, percentageOfDivSteps);
+            
             textBox6.Text = cmax.ToString();
             textBox7.Text = seconds;
-            textBox8.Text = diverse.ToString();
-            textBox9.Text = neighborhood.ToString();
+            textBox8.Text = percentageOfDivSteps.ToString();
+            textBox9.Text = newResultCount.ToString();
             textBox10.Text = tabuListSize.ToString();
             textBox11.Text = maxCountTheSameResult.ToString();
-            if(showMatrix)
+
+            if (showMatrix)
                 AddMatrixToRichTextBox2(matrix);
             resultMatrix = matrix;
             columnsToDeleteInMatrix = columnsToDelete;
         }
-
 
 
         private void button2_Click(object sender, EventArgs e)
@@ -193,15 +263,28 @@ namespace ConOnesProject
             if(inputMatrix.howMatrixIsGenerated == "random")
             {
                 SetValuesInTextBoxes(true);
-
             }
             else
             {
                 SetValuesInTextBoxes(false);
-
             }
             AddMatrixToRichTextBox(inputMatrix.inputMatrix);
+        }
 
+
+        public void ShowMatrix(int[,] matrix)
+        {
+            int matrixHeight = matrix.GetLength(0);
+            int matrixWidth = matrix.GetLength(1);
+            for (int i = 0; i < matrixHeight; i++)
+            {
+                for (int j = 0; j < matrixWidth; j++)
+                {
+                    Console.Write(matrix[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
 
 
@@ -214,8 +297,10 @@ namespace ConOnesProject
 
         private void button4_Click_1(object sender, EventArgs e)
         {
+
             ModifyMatrixForms modify = new ModifyMatrixForms(this as IFormsMatrixInformations, inputMatrix.inputMatrix, inputMatrix.rndResultlMatrix);
             modify.Show();
+            button3.Enabled = false;
 
         }
 
@@ -226,7 +311,7 @@ namespace ConOnesProject
             tabu.Show();
         }
 
-        private void button6_Click_1(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             ColumnToDeleteForm columnsToDelete = new ColumnToDeleteForm(resultMatrix, columnsToDeleteInMatrix);
             columnsToDelete.Show();
@@ -239,11 +324,12 @@ namespace ConOnesProject
 
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button8_Click_1(object sender, EventArgs e)
         {
             ReportForm report = new ReportForm(inputMatrix, result);
             report.Show();
         }
 
+        
     }
 }

@@ -44,14 +44,15 @@ namespace ConOnesProject
                 return;
             }
 
-            if (newMatrix.matrix.GetLength(0) == 1 && newMatrix.matrix.GetLength(1) == 1)
+            if (newMatrix.matrix.GetLength(0) == 1 || newMatrix.matrix.GetLength(1) == 1)
             {
                 MessageBox.Show("Matrix is too small!");
                 return;
 
             }
 
-            menuForm.addMatrixFromText(matrixText);
+            string type = "file";
+            menuForm.addMatrixFromText(matrixText, type);
             this.Close();
         }
     }

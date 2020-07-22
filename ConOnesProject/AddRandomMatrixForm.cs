@@ -79,7 +79,8 @@ namespace ConOnesProject
             }
 
             int percentageLen = Convert.ToInt32(lenChoiceText.Substring(0, lenChoiceText.Length - 1));
-            int maxNumberOfMistakes = (widthText * heightText)/5;
+
+            int maxNumberOfMistakes = (widthText-2) * heightText;
 
             if (!int.TryParse(textBox3.Text, out i))
             {
@@ -88,7 +89,7 @@ namespace ConOnesProject
             }
             else if(Convert.ToInt32(textBox3.Text) > maxNumberOfMistakes)
             {
-                MessageBox.Show("Number of mistakes can't be bigger than 20% of width * height");
+                MessageBox.Show("Number of mistakes can't be bigger than ((width-2) * height) value");
                 return;
 
             }

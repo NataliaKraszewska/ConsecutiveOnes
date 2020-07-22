@@ -18,6 +18,7 @@ namespace ConOnesProject
         public int numberOfMistakes;
         public int percentageLengthStringOfOnes;
         public string howMatrixIsGenerated;
+        public int cmax;
 
         public InputMatrix(int [,] a_matrix, string in_howMatrixIsGenerated)
         {
@@ -31,7 +32,12 @@ namespace ConOnesProject
             howMatrixIsGenerated = in_howMatrixIsGenerated;
         }
 
-
+        public int getCmax()
+        {
+            CmaxEstimation x = new CmaxEstimation(inputMatrix);
+            cmax = x.GetCmaxValue();
+            return cmax;
+        }
         public InputMatrix(int[,] a_matrix, int a_numberOfMistakes, int a_percentageLengthStringOfOnes, string in_howMatrixIsGenerated)
         {
             rndResultlMatrix = a_matrix;

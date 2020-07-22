@@ -45,7 +45,7 @@ namespace ConOnesProject
                 MessageBox.Show("The correct input file must contains a matrix, where columns are separated by whitespace, rows are separated by newline.");
                 return;
             }
-            if(newMatrix.matrix.GetLength(0) == 1 && newMatrix.matrix.GetLength(1) == 1)
+            if(newMatrix.matrix.GetLength(0) == 1 || newMatrix.matrix.GetLength(1) == 1)
             {
                 MessageBox.Show("Matrix is too small!");
                 return;

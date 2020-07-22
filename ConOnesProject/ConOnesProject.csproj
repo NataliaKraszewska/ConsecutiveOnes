@@ -71,6 +71,7 @@
     <Compile Include="AddYourOwnMatrixForm.Designer.cs">
       <DependentUpon>AddYourOwnMatrixForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoveInTabuList.cs" />
     <Compile Include="CmaxEstimation.cs" />
     <Compile Include="ColumnToDeleteForm.cs">
       <SubType>Form</SubType>

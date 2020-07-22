@@ -15,6 +15,7 @@ namespace ConOnesProject
 
         int[,] mixedColumnsMatrix;
         int[,] rndResultMatrix;
+        string typeOfInputMatrix;
 
         private IFormsMatrixInformations menuForm;
         public ModifyMatrixForms(IFormsMatrixInformations callingForm, int [,] aMixedColumnsMatrix, int [,] aRndResultMatrix)
@@ -50,9 +51,15 @@ namespace ConOnesProject
         private void button2_Click(object sender, EventArgs e)
         {
             string matrixText = richTextBox1.Text;
+            if (matrixText == "")
+            {
+                MessageBox.Show("All rows and columns must have the same size and matrix must contains only 0 and 1 values!");
+                return;
+            }
+
             MatrixFromText newMatrix = new MatrixFromText(matrixText);
 
-            if (newMatrix.matrix == null)
+            if (newMatrix.matrix == null || matrixText == "")
             {
                 MessageBox.Show("All rows and columns must have the same size and matrix must contains only 0 and 1 values!");
                 return;
@@ -63,7 +70,7 @@ namespace ConOnesProject
                 return;
 
             }
-            menuForm.addMatrixFromText(matrixText);
+            menuForm.addMatrixFromText(matrixText, typeOfInputMatrix);
             this.Close();
         }
 
@@ -71,6 +78,8 @@ namespace ConOnesProject
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             radioButton2.Checked = false;
+            typeOfInputMatrix = "mixedColumnsMatrix";
+           // radioButton1.Checked = true;
             richTextBox1.Clear();
             showMatrixInRichTextBox(mixedColumnsMatrix);
         }
@@ -79,6 +88,8 @@ namespace ConOnesProject
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radioButton1.Checked = false;
+            //radioButton2.Checked = true;
+            typeOfInputMatrix = "rndResultMatrix";
             richTextBox1.Clear();
             showMatrixInRichTextBox(rndResultMatrix);
         }

@@ -56,15 +56,15 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.panel21 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel20 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel19 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -312,6 +312,7 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
@@ -353,21 +354,65 @@
             // 
             // panel13
             // 
-            this.panel13.Controls.Add(this.textBox5);
+            this.panel13.Controls.Add(this.comboBox3);
             this.panel13.Controls.Add(this.panel21);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel13.Location = new System.Drawing.Point(0, 251);
+            this.panel13.Location = new System.Drawing.Point(0, 272);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(265, 62);
             this.panel13.TabIndex = 4;
             // 
-            // textBox5
+            // comboBox3
             // 
-            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox5.Location = new System.Drawing.Point(177, 0);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(88, 20);
-            this.textBox5.TabIndex = 1;
+            this.comboBox3.AutoCompleteCustomSource.AddRange(new string[] {
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30",
+            "35",
+            "40",
+            "45",
+            "50",
+            "55",
+            "60",
+            "65",
+            "70",
+            "75",
+            "80",
+            "85",
+            "90",
+            "95",
+            "100"});
+            this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "5%",
+            "10%",
+            "15%",
+            "20%",
+            "25%",
+            "30%",
+            "35%",
+            "40%",
+            "45%",
+            "50%",
+            "55%",
+            "60%",
+            "65%",
+            "70%",
+            "75%",
+            "80%",
+            "85%",
+            "90%",
+            "95%",
+            "100%"});
+            this.comboBox3.Location = new System.Drawing.Point(184, 0);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(81, 21);
+            this.comboBox3.TabIndex = 1;
             // 
             // panel21
             // 
@@ -375,7 +420,7 @@
             this.panel21.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel21.Location = new System.Drawing.Point(0, 0);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(177, 62);
+            this.panel21.Size = new System.Drawing.Size(184, 62);
             this.panel21.TabIndex = 0;
             // 
             // label6
@@ -385,27 +430,71 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 18);
+            this.label6.Size = new System.Drawing.Size(169, 36);
             this.label6.TabIndex = 0;
-            this.label6.Text = "TabuList size:";
+            this.label6.Text = "Percentage of maximum\r\ntabu list size:";
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.textBox4);
+            this.panel12.Controls.Add(this.comboBox2);
             this.panel12.Controls.Add(this.panel20);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(0, 190);
+            this.panel12.Location = new System.Drawing.Point(0, 194);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(265, 61);
+            this.panel12.Size = new System.Drawing.Size(265, 78);
             this.panel12.TabIndex = 3;
             // 
-            // textBox4
+            // comboBox2
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(177, 0);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(88, 20);
-            this.textBox4.TabIndex = 1;
+            this.comboBox2.AutoCompleteCustomSource.AddRange(new string[] {
+            "5%",
+            "10%",
+            "15%",
+            "20%",
+            "25%",
+            "30%",
+            "35%",
+            "40%",
+            "45%",
+            "50%",
+            "55%",
+            "60%",
+            "65%",
+            "70%",
+            "75%",
+            "80%",
+            "85%",
+            "90%",
+            "95%",
+            "100%"});
+            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "5%",
+            "10%",
+            "15%",
+            "20%",
+            "25%",
+            "30%",
+            "35%",
+            "40%",
+            "45%",
+            "50%",
+            "55%",
+            "60%",
+            "65%",
+            "70%",
+            "75%",
+            "80%",
+            "85%",
+            "90%",
+            "95%",
+            "100%"});
+            this.comboBox2.Location = new System.Drawing.Point(191, 0);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(74, 21);
+            this.comboBox2.TabIndex = 1;
             // 
             // panel20
             // 
@@ -413,7 +502,7 @@
             this.panel20.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel20.Location = new System.Drawing.Point(0, 0);
             this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(177, 61);
+            this.panel20.Size = new System.Drawing.Size(191, 78);
             this.panel20.TabIndex = 0;
             // 
             // label5
@@ -423,27 +512,72 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(182, 54);
+            this.label5.Size = new System.Drawing.Size(191, 72);
             this.label5.TabIndex = 0;
-            this.label5.Text = "How many the same \r\nresults should be found to \r\ndiversify the result matrix:";
+            this.label5.Text = "How many maximum \r\npercentage the same \r\nresults should be found \r\nto restart sea" +
+    "rch procedure:";
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.textBox3);
+            this.panel11.Controls.Add(this.comboBox1);
             this.panel11.Controls.Add(this.panel19);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 128);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(265, 62);
+            this.panel11.Size = new System.Drawing.Size(265, 66);
             this.panel11.TabIndex = 2;
             // 
-            // textBox3
+            // comboBox1
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(177, 0);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(88, 20);
-            this.textBox3.TabIndex = 1;
+            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            "5%",
+            "10%",
+            "15%",
+            "20%",
+            "25%",
+            "30%",
+            "35%",
+            "40%",
+            "45%",
+            "50%",
+            "55%",
+            "60%",
+            "65%",
+            "70%",
+            "75%",
+            "80%",
+            "85%",
+            "90%",
+            "95%",
+            "100%"});
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "5%",
+            "10%",
+            "15%",
+            "20%",
+            "25%",
+            "30%",
+            "35%",
+            "40%",
+            "45%",
+            "50%",
+            "55%",
+            "60%",
+            "65%",
+            "70%",
+            "75%",
+            "80%",
+            "85%",
+            "90%",
+            "95%",
+            "100%"});
+            this.comboBox1.Location = new System.Drawing.Point(182, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(83, 21);
+            this.comboBox1.TabIndex = 1;
             // 
             // panel19
             // 
@@ -451,7 +585,7 @@
             this.panel19.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel19.Location = new System.Drawing.Point(0, 0);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(177, 62);
+            this.panel19.Size = new System.Drawing.Size(182, 66);
             this.panel19.TabIndex = 0;
             // 
             // label4
@@ -461,9 +595,9 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(136, 54);
+            this.label4.Size = new System.Drawing.Size(184, 54);
             this.label4.TabIndex = 0;
-            this.label4.Text = "How many times \r\nneighborhoods are \r\nsearched:\r\n";
+            this.label4.Text = "How many percentages of\r\nmaximum movements are \r\nadded to diversify matrix:";
             // 
             // panel10
             // 
@@ -478,9 +612,9 @@
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(177, 0);
+            this.textBox2.Location = new System.Drawing.Point(184, 0);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(88, 20);
+            this.textBox2.Size = new System.Drawing.Size(81, 20);
             this.textBox2.TabIndex = 1;
             // 
             // panel18
@@ -489,7 +623,7 @@
             this.panel18.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel18.Location = new System.Drawing.Point(0, 0);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(177, 62);
+            this.panel18.Size = new System.Drawing.Size(184, 62);
             this.panel18.TabIndex = 0;
             // 
             // label3
@@ -499,9 +633,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 54);
+            this.label3.Size = new System.Drawing.Size(152, 54);
             this.label3.TabIndex = 3;
-            this.label3.Text = "How many times the \r\nalgorithm diversifies \r\nthe result matrix:";
+            this.label3.Text = "How many times\r\nthe search procedure \r\nmust be restarted:";
             // 
             // panel9
             // 
@@ -543,15 +677,12 @@
             this.panel16.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
             this.panel21.ResumeLayout(false);
             this.panel21.PerformLayout();
             this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
             this.panel20.ResumeLayout(false);
             this.panel20.PerformLayout();
             this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
             this.panel19.ResumeLayout(false);
             this.panel19.PerformLayout();
             this.panel10.ResumeLayout(false);
@@ -591,13 +722,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox2;
@@ -605,5 +733,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel25;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

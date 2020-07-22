@@ -48,6 +48,8 @@ namespace ConOnesProject
                 tw.WriteLine();
                 tw.Write("Height: " + inputMatrix.height);
                 tw.WriteLine();
+                tw.Write("Columns to delete to get consecutive ones matrix (cmax): " + inputMatrix.getCmax());
+                tw.WriteLine();
                 string howMatrixWasGenerated = inputMatrix.howMatrixIsGenerated;
                 if(howMatrixWasGenerated == "random")
                 {
@@ -123,11 +125,11 @@ namespace ConOnesProject
                 tw.WriteLine();
                 tw.Write("TabuSearch algorithm parameters: ");
                 tw.WriteLine();
-                tw.Write(" \t How many times the algorithm diversifies the result matrix: " + resultMatrix.diverse);
+                tw.Write(" \t How many percentages of maximum movements are added to the matrixto diversify it. " + resultMatrix.percentageOfDivSteps);
                 tw.WriteLine();
-                tw.Write(" \t How many times neighborhoods are searched: " + resultMatrix.maxCountTheSameResult);
+                tw.Write(" \t  Maximum the same results before running the tabu search algorithm again: " + resultMatrix.maxCountTheSameResult);
                 tw.WriteLine();
-                tw.Write(" \t How many the same results should be found to diversify the result matrix: " + resultMatrix.neighborhood);
+                tw.Write(" \t How many times the algorithm runs again: " + resultMatrix.newResultCount);
                 tw.WriteLine();
                 tw.Write(" \t TabuList max size: " + resultMatrix.tabuListSize);
                 tw.WriteLine();

@@ -16,21 +16,27 @@ namespace ConOnesProject
         int[,] matrix;
         int[,] greedyHeuristicsMatrix;
         bool stopTabuAlgorithm = false;
-        int diversifyMatrixCount;
-        int neighborhoodsCount;
+
         int theSameResultCount;
         int tabuListSize;
-        
+        int newResultsCountVal;
+        int divStepsVal;
+
+        int percentageOfDivSteps;
+        int percentageOfTabuList;
+        int percentageOfTheSameResCount;
+        Random r = new Random();
+
         public int cmax;
         public int[,] resultMatrix;
         public int[,] orderedColumnsMatrix;
         public List<int> columnsOrder;
         public List<int> columnsToDelete;
-
+        
 
 
         private IFormsMatrixInformations menuForm;
-        public TabuSearchAlgorithmForm(IFormsMatrixInformations callingForm, int [,] in_matrix)
+        public TabuSearchAlgorithmForm(IFormsMatrixInformations callingForm, int[,] in_matrix)
         {
             menuForm = callingForm;
             matrix = in_matrix;
@@ -52,6 +58,8 @@ namespace ConOnesProject
             }
             Console.WriteLine();
         }
+
+
 
 
         bool IsMoveOnTabuList(List<MovedColumnAndNeighborhood> TabuList, CurrentMatrix currentMatrix, int column, int randomPosition, int randomColumnIndex)
@@ -90,8 +98,10 @@ namespace ConOnesProject
 
             for (int i = 0; i < TabuList.Count; i++)
             {
-                if ((TabuList[i].column == column && TabuList[i].neighborhood == neighborhood) || (TabuList[i].column == column && TabuList[i].left_neighborhood == leftNeighborhoodIndex && TabuList[i].right_neighborhood == rightNeighborhoodIndex))
+                if ((TabuList[i].column == column && TabuList[i].neighborhood == neighborhood && TabuList[i].left_neighborhood == leftNeighborhoodIndex && TabuList[i].right_neighborhood == rightNeighborhoodIndex))
                 {
+                    //Console.WriteLine("proposition in list column: " + column + " left: " + leftNeighborhoodIndex + " right: " + rightNeighborhoodIndex + " neigh: " + neighborhood);
+
                     return true;
                 }
             }
@@ -100,28 +110,103 @@ namespace ConOnesProject
 
         }
 
+        bool MoveGenerateBetterResult(List<MovedColumnAndNeighborhood> TabuList, CurrentMatrix currentMatrix, int column, int randomPosition, int randomColumnIndex)
+        {
+            CmaxEstimation cmaxEstimator1 = new CmaxEstimation(currentMatrix.newMatrix); //obliczamy cmax
+            int currentCmaxValue = cmaxEstimator1.GetCmaxValue();
+
+            List<int> tmp = new List<int>();
+
+            int matrixWidth = matrix.GetLength(1);
+            int matrixHeight = matrix.GetLength(0);
+            var changedMatrix = new int[matrixHeight, matrixWidth];
+
+            for (int i = 0; i < currentMatrix.columnsOrder.Count; i++)
+                tmp.Add(currentMatrix.columnsOrder[i]);
+
+            tmp.RemoveAt(randomColumnIndex);
+            tmp.Insert(randomPosition, column);
+
+
+            for (int i = 0; i < matrixHeight; i++)
+            {
+                for (int j = 0; j < matrixWidth; j++)
+                {
+                    changedMatrix[i, j] = matrix[i, tmp[j]];
+                }
+            }
+
+            CmaxEstimation cmaxEstimator2 = new CmaxEstimation(changedMatrix); //obliczamy cmax
+            int newCmaxValue = cmaxEstimator2.GetCmaxValue();
+
+
+            if (newCmaxValue > currentCmaxValue)
+                return true;
+
+            return false;
+        }
+
+        MoveInTabuList GetMove(CurrentMatrix currentMatrix, List<MovedColumnAndNeighborhood> TabuList, int maxValue)
+        {
+            List<int> indexList = currentMatrix.columnsOrder;
+            int randomColumnIndex = r.Next(maxValue);
+            int randomPosition = r.Next(maxValue);
+            int column = indexList[randomColumnIndex];
+
+            // for (int i = 0; i < TabuList.Count; i++)
+            //{
+            // Console.WriteLine("Column in tabu: " + TabuList[i].column + " left: " + TabuList[i].left_neighborhood + " right: " + TabuList[i].right_neighborhood + " neigh: " + TabuList[i].neighborhood);
+            //  }
+            //    Console.WriteLine("_________________________");
+            bool foundMove = false;
+            while (!foundMove)
+            {
+                if (!IsMoveOnTabuList(TabuList, currentMatrix, column, randomPosition, randomColumnIndex) && !(randomColumnIndex == randomPosition))
+                {
+                    foundMove = true;
+                }
+                else if (MoveGenerateBetterResult(TabuList, currentMatrix, column, randomPosition, randomColumnIndex)) // jesli poprawa cmax to dopuszczamy ruch 
+                {
+                    foundMove = true;
+                }
+                else
+                {
+                    randomColumnIndex = r.Next(maxValue);
+                    randomPosition = r.Next(maxValue);
+                    column = indexList[randomColumnIndex];
+                }
+
+            }
+            return (new MoveInTabuList(randomColumnIndex, randomPosition, column));
+        }
+
+
+
         CurrentMatrix ChangeInMatrix(CurrentMatrix currentMatrix, List<MovedColumnAndNeighborhood> TabuList)
         {
             //int[,] matrix = currentMatrix.newMatrix;
             List<int> indexList = currentMatrix.columnsOrder;
 
-            Random r = new Random(); //losujemy zmiane
             int matrixWidth = matrix.GetLength(1);
             int matrixHeight = matrix.GetLength(0);
-            int randomColumnIndex = r.Next(matrixWidth);
-            int randomPosition = r.Next(matrixWidth);
-            int column = indexList[randomColumnIndex];
             var changedMatrix = new int[matrixHeight, matrixWidth];
 
-            // Console.WriteLine(randomColumnIndex + " " + randomPosition + " " + column);
-            //sprawdzamy czy taka zmiana jest w liście tabu - musimy znalezc lewego i prawego sąsiada naszego rozwiązania
+            //Console.WriteLine("tu8");
+            MoveInTabuList move = GetMove(currentMatrix, TabuList, matrixWidth);
+            int randomColumnIndex = move.randomColumnIndex;
+            int randomPosition = move.randomPosition;
+            int column = move.column;
+            //Console.WriteLine("tu9");
 
-            if (IsMoveOnTabuList(TabuList, currentMatrix, column, randomPosition, randomColumnIndex) || randomColumnIndex == randomPosition)
-            {
-                randomColumnIndex = r.Next(matrixWidth);
-                randomPosition = r.Next(matrixWidth);
-                column = indexList[randomColumnIndex];
-            }
+            // Console.WriteLine("wylosowano wartosci: index kolumny: " + randomColumnIndex + " pozycja: " + randomPosition + " kolumna: " + column);
+            //sprawdzamy czy taka zmiana jest w liście tabu - musimy znalezc lewego i prawego sąsiada naszego rozwiązania
+            //Console.WriteLine("Tabu list: ");
+            // for (int i = 0; i < TabuList.Count; i++)
+            //{
+            //  Console.WriteLine("Column in tabu: " + TabuList[i].column + " left: " + TabuList[i].left_neighborhood + " right: " + TabuList[i].right_neighborhood + " neigh" + TabuList[i].neighborhood);
+            //}
+
+            //Console.ReadLine();
 
             //wykonujemy zmiane
             indexList.RemoveAt(randomColumnIndex);
@@ -143,9 +228,11 @@ namespace ConOnesProject
             Console.WriteLine();
             */
             //sprawdzamy sąsiadow
+
             int leftNeighborhoodIndex = 0;
             int rightNeighborhoodIndex = 0;
             int neighborhood = 0;
+
             if (randomPosition == 0)
             {
                 neighborhood = indexList[randomPosition + 1];
@@ -162,7 +249,7 @@ namespace ConOnesProject
 
 
 
-            // Console.WriteLine("Candidate info: ");
+            //Console.WriteLine("Candidate info: ");
             //Console.WriteLine("Column: " + column + " neigh: " + neighborhood + " left: " + leftNeighborhoodIndex + " right: " + rightNeighborhoodIndex);
 
             if (leftNeighborhoodIndex != 0 && rightNeighborhoodIndex != 0)
@@ -176,12 +263,13 @@ namespace ConOnesProject
                 TabuList.Add(columnAndNeighborhood);
             }
 
-            /* Console.WriteLine("Tabu list: ");
-             for (int i = 0; i < TabuList.Count; i++)
-             {
-                 Console.WriteLine("Column in tabu: " + TabuList[i].column + " left: " + TabuList[i].left_neighborhood + " right: " + TabuList[i].right_neighborhood + " neigh" + TabuList[i].neighborhood);
-             }
-             */
+            //Console.WriteLine("Tabu list: size" + TabuList.Count);
+            //for (int i = 0; i < TabuList.Count; i++)
+            // {
+            //   Console.WriteLine("Column in tabu: " + TabuList[i].column + " left: " + TabuList[i].left_neighborhood + " right: " + TabuList[i].right_neighborhood + " neigh: " + TabuList[i].neighborhood);
+            //}
+            //Console.WriteLine("_________________________");
+
             for (int i = 0; i < matrixHeight; i++)
             {
                 for (int j = 0; j < matrixWidth; j++)
@@ -189,10 +277,12 @@ namespace ConOnesProject
                     changedMatrix[i, j] = matrix[i, indexList[j]];
                 }
             }
+
+
+
+            CurrentMatrix newMatrix = new CurrentMatrix(changedMatrix, indexList);
             //Console.WriteLine("new matrix:");
             //ShowMatrix(changedMatrix);
-            CurrentMatrix newMatrix = new CurrentMatrix(changedMatrix, indexList);
-
             return newMatrix;
         }
 
@@ -213,44 +303,13 @@ namespace ConOnesProject
 
         CurrentMatrix GenerateDiversifyingMovements(CurrentMatrix currentMatrix, int numberOfMovements)
         {
-            int[,] resultMatrix = currentMatrix.newMatrix;
-            List<int> indexList = currentMatrix.columnsOrder;
-
-            Random r = new Random(); //losujemy zmiane
-            int matrixWidth = matrix.GetLength(1);
-            int matrixHeight = matrix.GetLength(0);
-            var changedMatrix = new int[matrixHeight, matrixWidth];
-
-            int numberOfMovementsCount = 0;
-            List<DiversifyingMovements> movements = new List<DiversifyingMovements>();
-
-            while (numberOfMovements != numberOfMovementsCount)
+            List<MovedColumnAndNeighborhood> TabuListForNewResult = new List<MovedColumnAndNeighborhood>();
+            for (int i = 0; i < numberOfMovements; i++)
             {
-                int randomColumnIndex = r.Next(matrixWidth);
-                int randomPosition = r.Next(matrixWidth);
-                int column = indexList[randomColumnIndex];
-
-                if (!IsMovementInList(movements, column, randomPosition))
-                {
-                    DiversifyingMovements movement = new DiversifyingMovements(column, randomPosition);
-                    movements.Add(movement);
-
-                    indexList.RemoveAt(randomColumnIndex);
-                    indexList.Insert(randomPosition, column);
-                    numberOfMovementsCount += 1;
-                }
+                currentMatrix = ChangeInMatrix(currentMatrix, TabuListForNewResult);
             }
-
-            for (int i = 0; i < matrixHeight; i++)
-            {
-                for (int j = 0; j < matrixWidth; j++)
-                {
-                    changedMatrix[i, j] = matrix[i, indexList[j]];
-                }
-            }
-            CurrentMatrix newMatrix = new CurrentMatrix(changedMatrix, indexList);
-
-            return newMatrix;
+           
+            return currentMatrix;
         }
 
 
@@ -270,62 +329,190 @@ namespace ConOnesProject
         }
 
 
+
+        int GetColumnInPosition(List<int> columnsInPosition, List<int> columnsOrderFromResults, int index)
+        {
+            /*for (int i = 0; i < columnsInPosition.Count; i++)
+                Console.Write(columnsInPosition[i] + " ");
+            Console.WriteLine();
+            */
+
+            List<int> top = columnsInPosition
+                .GroupBy(i => i)
+                .OrderByDescending(g => g.Count())
+                .Take(columnsInPosition.Count())
+                .Select(g => g.Key).ToList();
+
+            //Console.WriteLine("index: " + index +" size:" + columnsInPosition.Count + "top size" + top.Count());
+
+            
+
+            if(top.Count() <= index)
+            {
+                int columnsCount = matrix.GetLength(1);
+                for(int i = 0; i< columnsCount; i++)
+                {
+                    if (!columnsOrderFromResults.Contains(i))
+                        return i;
+                }
+            }
+
+
+            int val = top[index];
+            return val;
+
+        }
+
+
+
+        int GetColumnFromResult(List<List<int>> resultsList, int index, List<int> columnsOrderFromResults)
+        {
+            List<int> columnsInPosition = new List<int>();
+            for (int i = 0; i < resultsList.Count; i++)
+            {
+                columnsInPosition.Add(resultsList[i][index]);
+
+            }
+            int result = 0;
+            bool found = false;
+            index = 0;
+            while(!found)
+            {
+                result = GetColumnInPosition(columnsInPosition, columnsOrderFromResults, index);
+                if (columnsOrderFromResults.Contains(result))
+                {
+                    found = false;
+                    index++;
+                }
+
+                else
+                    found = true;
+            }
+
+            return result;
+        }
+
+        CurrentMatrix GetNewResult(CurrentMatrix currentMatrix, List<List<int>> resultsList)
+        {
+            //Console.WriteLine("tu: "+resultsList[0].cmax);
+            int matrixWidth = matrix.GetLength(1);
+            int matrixHeight = matrix.GetLength(0);
+            var changedMatrix = new int[matrixHeight, matrixWidth];
+
+
+            //Console.WriteLine(resultsList.Count);
+            /*
+            for(int i = 0; i<resultsList.Count();i++)
+            {
+                for (int j = 0; j < resultsList[i].Count(); j++)
+                    Console.Write(resultsList[i][j] + " ");
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            */
+
+            List<int> columnsOrderFromResults = new List<int>();
+
+            if (resultsList.Count() == 1)
+            {
+                for (int i = 0; i < matrixWidth; i++)
+                {
+
+                    columnsOrderFromResults.Add(resultsList[0][i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < matrixWidth; i++)
+                {
+                   // Console.WriteLine(i);
+                    //for (int j = 0; j < columnsOrderFromResults.Count; j++)
+                      //  Console.Write(columnsOrderFromResults[j] + " ");
+                    //Console.WriteLine();
+
+                    int columnIndexToAdd = GetColumnFromResult(resultsList, i, columnsOrderFromResults);
+                    columnsOrderFromResults.Add(columnIndexToAdd);
+
+                }
+            }
+
+            /*
+            for (int j = 0; j < columnsOrderFromResults.Count; j++)
+                Console.Write(columnsOrderFromResults[j] + " ");
+            Console.WriteLine();
+            */
+                for (int i = 0; i < matrixHeight; i++)
+            {
+                for (int j = 0; j < matrixWidth; j++)
+                {
+                    changedMatrix[i, j] = matrix[i, columnsOrderFromResults[j]];
+                }
+            }
+
+            CurrentMatrix newMatrix = new CurrentMatrix(changedMatrix, columnsOrderFromResults);
+
+            return newMatrix;
+
+        }
+
+
         void runTabuSearchAlgorithm()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var elapsedMs = watch.ElapsedMilliseconds;
             string seconds = "";
-            //Console.WriteLine("Input matrix:");
-            //ShowMatrix(matrix);
-            Console.WriteLine("tu1");
 
             GreedyHeuristic initialMatrix = new GreedyHeuristic(matrix);
             greedyHeuristicsMatrix = initialMatrix.GreedyHeuristicAlgorythm();
 
-            //Console.WriteLine("Greedy heuristics matrix:");
-            //ShowMatrix(greedyHeuristicsMatrix);
-
             CmaxEstimation cmaxEstimator = new CmaxEstimation(greedyHeuristicsMatrix);
             int cmaxValue = cmaxEstimator.GetCmaxValue();
-            //Console.WriteLine("Cmax value: ");
-            //Console.WriteLine(cmaxValue);
+
 
             List<int> greedyHeuristicsMatrixsOrder = initialMatrix.columnsOrderInOryginalMatrix;
             CurrentResult result = new CurrentResult(cmaxValue, greedyHeuristicsMatrixsOrder, greedyHeuristicsMatrix, cmaxEstimator.columns_to_delete_in_matrix);
-
+            CurrentResult globalResult = new CurrentResult(cmaxValue, greedyHeuristicsMatrixsOrder, greedyHeuristicsMatrix, cmaxEstimator.columns_to_delete_in_matrix);
             CurrentMatrix currentMatrix = new CurrentMatrix(greedyHeuristicsMatrix, greedyHeuristicsMatrixsOrder); //macierz wejściowa
             List<MovedColumnAndNeighborhood> TabuList = new List<MovedColumnAndNeighborhood>(); //inicjacja listy tabu
 
-            int maxStepWithoutBetterResult = theSameResultCount;
+
             int stepWithoutBetterResultCount = 0;
-            int generateDiversifyingMovementsCount = diversifyMatrixCount;
-            int NeighbornHoodsCountToVisit = neighborhoodsCount;
+            int maxStepWithoutBetterResult = theSameResultCount;
+
+            int newResultsCount = newResultsCountVal;
+            int divSteps = divStepsVal;
+
             bool showMatrix = true;
 
-            int progresBarMaximumSize = generateDiversifyingMovementsCount;
+            int progresBarMaximumSize = newResultsCount;
             progressBar1.Maximum = progresBarMaximumSize;
             progressBar1.Value = 0;
-            int value = result.cmax;
+            int value = globalResult.cmax;
 
             chart1.Series["Series1"].Points.Clear();
 
+            List<List<int>> resultsList = new List<List<int>>();
+            resultsList.Add(result.columnsOrder);
 
-
-            while (generateDiversifyingMovementsCount != 0)
+            while (newResultsCount != 0)
             {
-                Console.WriteLine("tu2");
-                textBox1.Text = result.cmax.ToString();
-                if(result.cmax < value)
+               // Console.WriteLine("new result count: " + newResultsCount);/////////////////////////////////
+               // Console.WriteLine("tabu list count: " + TabuList.Count());
+               // Console.WriteLine("result withound better cmax: " + stepWithoutBetterResultCount);
+                //Console.WriteLine("Div steps: " + divSteps);
+
+                textBox1.Text = globalResult.cmax.ToString();
+               
+
+                if (globalResult.cmax < value) 
                 {
-                    value = result.cmax;
+                    value = globalResult.cmax;
                     Thread.Sleep(50);
                     chart1.Series["Series1"].Points.AddY(value);
                     chart1.Update();
                     Application.DoEvents();
 
                 }
-
-                progressBar1.Value = progresBarMaximumSize - generateDiversifyingMovementsCount + 1;
 
                 if (stopTabuAlgorithm)
                 {
@@ -335,10 +522,12 @@ namespace ConOnesProject
                         seconds = elapsedMs.ToString() + "ms";
                     else
                         seconds = (elapsedMs / 1000).ToString() + "s";
-                    cmax = result.cmax;
-                    resultMatrix = result.matrix;
-                    columnsOrder = result.columnsOrder;
-                    columnsToDelete = result.columnToDelete;
+
+                    cmax = globalResult.cmax;
+                    resultMatrix = globalResult.matrix;
+                    columnsOrder = globalResult.columnsOrder;
+                    columnsToDelete = globalResult.columnToDelete;
+
                     if (resultMatrix.GetLength(0) > 50 && resultMatrix.GetLength(1) > 50)
                     {
                         DialogResult dialogResult = MessageBox.Show("Matrix is big. Do you want to show matrix in program?", "Do you want to show matrix?", MessageBoxButtons.YesNo);
@@ -347,33 +536,42 @@ namespace ConOnesProject
                             showMatrix = false;
                         }
                     }
-                    menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount, seconds, showMatrix);
+
+                    menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, divStepsVal, newResultsCountVal, tabuListSize, theSameResultCount, seconds, showMatrix, percentageOfDivSteps);
                     this.Close();
 
                     Thread.CurrentThread.Abort();
                 }
 
                 int tabuListMaxSize = tabuListSize;
-                Console.Write(NeighbornHoodsCountToVisit);
-
-                currentMatrix = ChangeInMatrix(currentMatrix, TabuList); // robimy ruch
-                Console.Write(NeighbornHoodsCountToVisit);
-
-                NeighbornHoodsCountToVisit -= 1;
+                currentMatrix = ChangeInMatrix(currentMatrix, TabuList); // robimy ruch               
                 cmaxEstimator = new CmaxEstimation(currentMatrix.newMatrix); //obliczamy cmax
                 cmaxValue = cmaxEstimator.GetCmaxValue();
 
-                if (result.cmax > cmaxValue)
+                if (result.cmax >= cmaxValue)
                 {
+                    /* if (result.cmax > cmaxValue)
+                     {
+                         Console.WriteLine("1 result: cmax: " + result.cmax + " s:" + watch.ElapsedMilliseconds / 1000);
+                         //tw.Write("'" + watch.ElapsedMilliseconds / 1000 + ";" + result.cmax + "\n");
+                     }*/
+
                     result = new CurrentResult(cmaxValue, currentMatrix.columnsOrder, currentMatrix.newMatrix, cmaxEstimator.columns_to_delete_in_matrix);
+
+                    List<int> tmp = new List<int>();
+                    for (int i = 0; i < result.columnsOrder.Count; i++)
+                        tmp.Add(result.columnsOrder[i]);
+                    resultsList.Add(tmp);
                 }
                 else
                 {
                     currentMatrix = new CurrentMatrix(result.matrix, result.columnsOrder);
                 }
 
+
                 if (TabuList.Count > tabuListMaxSize) //update tabu list
                 {
+
                     TabuList.Remove(TabuList[0]);
                 }
 
@@ -386,69 +584,143 @@ namespace ConOnesProject
                     stepWithoutBetterResultCount = 0;
                 }
 
-                if (stepWithoutBetterResultCount == maxStepWithoutBetterResult || NeighbornHoodsCountToVisit == 0) //jesli nie ma poprawy
-                {
-                    Console.WriteLine("tu3");
-                    int numberOfColumnToChange = (int)(0.2 * matrix.GetLength(1));
-                    currentMatrix = GenerateDiversifyingMovements(currentMatrix, numberOfColumnToChange); //robimy nowe rozwiazanie poczatkowe 
-                    NeighbornHoodsCountToVisit = neighborhoodsCount;
-                    generateDiversifyingMovementsCount -= 1;
-                    stepWithoutBetterResultCount = 0;
+                //##################################################################################################
 
-                    cmaxEstimator = new CmaxEstimation(currentMatrix.newMatrix);
-                    cmaxValue = cmaxEstimator.GetCmaxValue();
-                    if (result.cmax > cmaxValue)
+                if (stepWithoutBetterResultCount == Convert.ToInt32(0.8 * maxStepWithoutBetterResult)) //jesli nie ma poprawy po polowie rozwiązań
+                {
+                    //Console.WriteLine("1) Lista tabu rozmiar: " + TabuList.Count() + " kroki bez poprawy" + stepWithoutBetterResultCount);
+                    for (int i = 0; i < divSteps; i++)
                     {
-                        result = new CurrentResult(cmaxValue, currentMatrix.columnsOrder, currentMatrix.newMatrix, cmaxEstimator.columns_to_delete_in_matrix);
+                      
+                        if (stopTabuAlgorithm)
+                            i = divSteps;
+
+                        
+                        currentMatrix = ChangeInMatrix(currentMatrix, TabuList); // robimy ruch
+                        
+                        cmaxEstimator = new CmaxEstimation(currentMatrix.newMatrix); //obliczamy cmax
+                        cmaxValue = cmaxEstimator.GetCmaxValue();
+
+                        if (result.cmax >= cmaxValue)
+                        {
+
+                            /*  if (result.cmax > cmaxValue)
+                              {
+                                 // Console.WriteLine("2 result: cmax: " + result.cmax + " s:" + watch.ElapsedMilliseconds / 1000);
+                                  //tw.Write("'"+watch.ElapsedMilliseconds / 1000 + ";" + result.cmax + "\n");
+                              }*/
+
+                            result = new CurrentResult(cmaxValue, currentMatrix.columnsOrder, currentMatrix.newMatrix, cmaxEstimator.columns_to_delete_in_matrix);
+                            resultsList.Add(result.columnsOrder);
+
+                        }
+                        else
+                        {
+                            currentMatrix = new CurrentMatrix(result.matrix, result.columnsOrder);
+                        }
+
+
+                        if (TabuList.Count > tabuListMaxSize) //update tabu list
+                        {
+
+                            TabuList.Remove(TabuList[0]);
+                        }
+                    }
+
+                    if (result.cmax <= cmaxValue)
+                    {
+                        stepWithoutBetterResultCount += 1; // gdy wynik nie polepsza sie bez przerwy
                     }
                     else
                     {
-                        currentMatrix = new CurrentMatrix(result.matrix, result.columnsOrder);
+                        stepWithoutBetterResultCount = 0;
+                    }
+
+                }
+                //##################################################################################################
+
+                progressBar1.Value = progresBarMaximumSize - newResultsCount + 1;
+                if (stepWithoutBetterResultCount == maxStepWithoutBetterResult) //jesli nie ma poprawy
+                {
+                    
+                    //Console.WriteLine("2) Lista tabu rozmiar: "+TabuList.Count() + " kroki bez poprawy" + stepWithoutBetterResultCount);
+                    if (globalResult.cmax > result.cmax) // zmieniamy globalne rozwiazanie
+                    {
+                        globalResult = result;
+                        currentMatrix = new CurrentMatrix(globalResult.matrix, globalResult.columnsOrder);
+
+                        // Console.WriteLine("global result cmax: " + globalResult.cmax + " s:" + watch.ElapsedMilliseconds / 1000);
+                        //tw.Write("'" + watch.ElapsedMilliseconds / 1000 + ";" + globalResult.cmax + "\n");
+
+
+                        //Console.WriteLine(globalResult.cmax);
+                    }
+
+
+                    //Console.WriteLine("2 steps without better results " + stepWithoutBetterResultCount + " neigh: " + NeighbornHoodsCountToVisit);
+                    //int numberOfColumnToChange = (int)(0.3 * matrix.GetLength(1) * matrix.GetLength(1));
+                    //Console.WriteLine("tu1");
+                    //ShowMatrix(currentMatrix.newMatrix);
+                    //currentMatrix = GenerateDiversifyingMovements(currentMatrix, numberOfColumnToChange); //robimy nowe rozwiazanie poczatkowe 
+
+                    currentMatrix = GetNewResult(currentMatrix, resultsList);
+
+                    //ShowMatrix(currentMatrix.newMatrix);
+                    //Console.WriteLine("tu2");
+                    newResultsCount -= 1;
+                    stepWithoutBetterResultCount = 0;
+                    TabuList.Clear();
+
+                    cmaxEstimator = new CmaxEstimation(currentMatrix.newMatrix);
+                    cmaxValue = cmaxEstimator.GetCmaxValue();
+                    currentMatrix = new CurrentMatrix(result.matrix, result.columnsOrder);
+                    result = new CurrentResult(cmaxValue, currentMatrix.columnsOrder, currentMatrix.newMatrix, cmaxEstimator.columns_to_delete_in_matrix);
+
+
+                }
+
+               
+
+
+            }
+            watch.Stop();
+                elapsedMs = watch.ElapsedMilliseconds;
+
+                if (elapsedMs < 1000)
+                    seconds = elapsedMs.ToString() + "ms";
+                else
+                    seconds = (elapsedMs / 1000).ToString() + "s";
+
+                cmax = globalResult.cmax;
+                resultMatrix = globalResult.matrix;
+                columnsOrder = globalResult.columnsOrder;
+                columnsToDelete = globalResult.columnToDelete;
+
+
+                if (resultMatrix.GetLength(0) > 50 && resultMatrix.GetLength(1) > 50)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Matrix is big. Do you want to show matrix in program?", "Do you want to show matrix?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        showMatrix = false;
                     }
                 }
 
-            }
 
-            watch.Stop();
-            elapsedMs = watch.ElapsedMilliseconds;
+                menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, divStepsVal, newResultsCountVal, tabuListSize, theSameResultCount, seconds, showMatrix, percentageOfDivSteps);
 
-            if (elapsedMs < 1000)
-                seconds = elapsedMs.ToString() + "ms";
-            else
-                seconds = (elapsedMs / 1000).ToString() + "s";
+                Thread.Sleep(900);
 
-            cmax = result.cmax;
-            resultMatrix = result.matrix;
-            columnsOrder = result.columnsOrder;
-            columnsToDelete = result.columnToDelete;
+                this.Close();
 
 
-            if(resultMatrix.GetLength(0) > 50 && resultMatrix.GetLength(1) > 50)
-            {
-                DialogResult dialogResult = MessageBox.Show("Matrix is big. Do you want to show matrix in program?", "Do you want to show matrix?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.No)
-                {
-                    showMatrix = false;
-                }
-            }
-            menuForm.resultMatrix(resultMatrix, cmax, columnsOrder, columnsToDelete, diversifyMatrixCount, neighborhoodsCount, tabuListSize, theSameResultCount,seconds, showMatrix);
-
-            Thread.Sleep(900);
-
-            this.Close();
-
-            /*
-            for (int i = 0; i < result.columnsOrder.Count; i++)
-            {
-                Console.Write(result.columnsOrder[i] + " ");
-            }
-            Console.WriteLine();
-            */
+            
         }
 
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            
             int i;
             if (!int.TryParse(textBox2.Text, out i)  || textBox2.Text == "0")
             {
@@ -457,39 +729,60 @@ namespace ConOnesProject
             }
             else
             {
-                diversifyMatrixCount = Convert.ToInt32(textBox2.Text);
+                newResultsCountVal = Convert.ToInt32(textBox2.Text);
+
             }
 
-            if (!int.TryParse(textBox3.Text, out i) || textBox3.Text == "0")
+            if (comboBox1.Text == "0" || comboBox1.Text=="")
             {
                 MessageBox.Show("Add int value to all fields!!!");
                 return;
             }
             else
             {
-                neighborhoodsCount = Int32.Parse(textBox3.Text);
+                
+                int matrixColumnsCount = matrix.GetLength(1);
+                string val = comboBox1.Text; 
+                percentageOfDivSteps = Convert.ToInt32(val.Substring(0, val.Length - 1));
+                int maxValOfMovements = (matrixColumnsCount + 1) * (matrixColumnsCount - 1) * (matrixColumnsCount - 1) - (matrixColumnsCount - 1);
+                    divStepsVal = Convert.ToInt32(maxValOfMovements * percentageOfDivSteps / 100);
+               
             }
 
-            if (!int.TryParse(textBox4.Text, out i) || textBox4.Text == "0")
+            if (comboBox2.Text == "0"||comboBox2.Text == "") 
             {
                 MessageBox.Show("Add int value to all fields!!!");
                 return;
             }
             else
             {
-                theSameResultCount = Int32.Parse(textBox4.Text);
+                string val = comboBox2.Text;
+                percentageOfTheSameResCount = Convert.ToInt32(val.Substring(0, val.Length - 1));
+
+                int matrixColumnsCount = matrix.GetLength(1);
+                int maxValOfMovements = (matrixColumnsCount + 1) * (matrixColumnsCount - 1) * (matrixColumnsCount - 1) - (matrixColumnsCount - 1);
+
+                theSameResultCount = Convert.ToInt32((maxValOfMovements * percentageOfTheSameResCount) / 100);
             }
 
-            if (!int.TryParse(textBox5.Text, out i) || textBox5.Text == "0")
+            if (comboBox3.Text == "0" || comboBox3.Text == "")
             {
                 MessageBox.Show("Add int value to all fields!!!");
                 return;
             }
             else
             {
-                tabuListSize = Int32.Parse(textBox5.Text);
+                string val = comboBox3.Text;
+                percentageOfTabuList = Convert.ToInt32(val.Substring(0, val.Length - 1));
+                int matrixColumnsCount = matrix.GetLength(1);
+                int maxValOfMovements = (matrixColumnsCount + 1) * (matrixColumnsCount - 1) * (matrixColumnsCount - 1) - (matrixColumnsCount - 1);
+
+                tabuListSize = Convert.ToInt32((maxValOfMovements * percentageOfTabuList) / 100);
             }
 
+
+            button1.Enabled = false;
+            button2.Enabled = true;
             CheckForIllegalCrossThreadCalls = false;
             stopTabuAlgorithm = false;
             Thread t = new Thread(runTabuSearchAlgorithm);
@@ -500,8 +793,9 @@ namespace ConOnesProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
             stopTabuAlgorithm = true;
         }
-
+         
     }
 }
