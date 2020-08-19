@@ -26,6 +26,7 @@ namespace ConOnesProject
         {
             if (inputId == id)
                 return startInRow;
+
             return 0;
         }
 
@@ -34,6 +35,7 @@ namespace ConOnesProject
         {
             if (inputId == id)
                 return endInRow;
+
             return 0;
         }
 
@@ -42,6 +44,7 @@ namespace ConOnesProject
         {
             if (inputId == id)
                 return seq;
+
             return null;
         }
     }

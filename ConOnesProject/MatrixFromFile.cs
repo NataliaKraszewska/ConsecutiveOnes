@@ -34,10 +34,9 @@ namespace ConOnesProject
             }
 
             string[] lines = File.ReadAllLines(filePath);
-
-                height = lines.Length;
-                width = Regex.Replace(lines[0], @"\s+", "").Length;
-                matrix = new int[height, width];
+            height = lines.Length;
+            width = Regex.Replace(lines[0], @"\s+", "").Length;
+            matrix = new int[height, width];
 
             try
             {
@@ -64,7 +63,6 @@ namespace ConOnesProject
                 return null;
             }
             
-
             return matrix;
         }
     }

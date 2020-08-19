@@ -36,7 +36,6 @@ namespace ConOnesProject
                 }
             }
             this.Close();
-
         }
     }
 }

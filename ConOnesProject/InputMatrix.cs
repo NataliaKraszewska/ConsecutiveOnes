@@ -32,12 +32,15 @@ namespace ConOnesProject
             howMatrixIsGenerated = in_howMatrixIsGenerated;
         }
 
+
         public int getCmax()
         {
             CmaxEstimation x = new CmaxEstimation(inputMatrix);
             cmax = x.GetCmaxValue();
             return cmax;
         }
+
+
         public InputMatrix(int[,] a_matrix, int a_numberOfMistakes, int a_percentageLengthStringOfOnes, string in_howMatrixIsGenerated)
         {
             rndResultlMatrix = a_matrix;
@@ -64,7 +67,6 @@ namespace ConOnesProject
         }
 
   
-        //todo
         public int GetNumberOfColumnsToDelete(int[,] matrix)
         {
             int matrixHeight = matrix.GetLength(0);
@@ -113,6 +115,5 @@ namespace ConOnesProject
 
             return matrix;
         }
-        
     }
 }

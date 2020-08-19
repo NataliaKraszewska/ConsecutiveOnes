@@ -25,10 +25,9 @@ namespace ConOnesProject
             oryginal_row = in_row;
             columns = Get_columns();
             oryginal_columns = columns;
-            //in_row.Reverse();
-            //reverse_row = in_row;
             position_in_matrix = id;
         }
+
 
         List<int> Get_columns()
         {
@@ -37,8 +36,10 @@ namespace ConOnesProject
             {
                 columns.Add(i);
             }
+
             return columns;
         }
+
 
         public void Change_row(List<int> column_to_delete)
         {
@@ -52,67 +53,33 @@ namespace ConOnesProject
                         new_row.Add(row[i]);
                     }
                 }
-                row = new_row;
 
-                //Console.WriteLine("oryginal columns");
-                //for(int i = 0; i <oryginal_columns.Count; i++)
-                //{
-                //  Console.Write(oryginal_columns[i] + " ");
-                //}Console.WriteLine();
+                row = new_row;
                 List<int> new_columns = new List<int>();
+
                 for (int i = 0; i < oryginal_columns.Count; i++)
                 {
                     if (!column_to_delete.Contains(i))
                     {
                         new_columns.Add(oryginal_columns[i]);
-                        // if(oryginal_columns[i] < 0)
-                        //{
-
-                        //  Console.WriteLine("oryfinal column " + oryginal_columns[i]);
-                        //}
                     }
                 }
-
-                /* Console.WriteLine("new columns");
-                 for( int i = 0; i<new_columns.Count; i++)
-                 {
-                     Console.Write(new_columns[i] + " ");
-                 }Console.WriteLine();
-
-             */
                 columns = new_columns;
-
-                //  Console.WriteLine("columns in row: ");
-                /*for (int i = 0; i < columns.Count; i++)
-                {
-                    Console.Write(columns[i] + " ");
-                }Console.WriteLine();
-                */
-                /*
-                for(int i= 0;i<new_columns.Count;i++)
-                {
-                    Console.Write(new_columns[i] + " ");
-                }Console.WriteLine();
-                */
             }
         }
+
 
         public List<int> Get_columns_to_delete_from_matrix(List<int> columns_to_delete)
         {
             List<int> columns_to_delete_from_matrix = new List<int>();
-            /*
-            Console.WriteLine("columns to delete size: " + columns_to_delete.Count);
-            Console.WriteLine("columns size: " + columns.Count);
-            Console.WriteLine("columns to delete indexes:");
-            */
             for (int i = 0; i < columns_to_delete.Count; i++)
             {
-                //Console.Write(columns_to_delete[i] + " ");
                 columns_to_delete_from_matrix.Add(columns[columns_to_delete[i]]);
-            }   //Console.WriteLine();
+            }
 
             return columns_to_delete_from_matrix;
         }
+
 
         private List<int> Get_ones_position(bool reverse)
         {
@@ -123,7 +90,6 @@ namespace ConOnesProject
                 {
                     if (row[i] == 1)
                     {
-
                         ones_position.Add(i);
                     }
                 }
@@ -186,6 +152,7 @@ namespace ConOnesProject
                 rev_row.Add(row[i]);
             }
             rev_row.Reverse();
+
             return rev_row;
         }
 
@@ -199,28 +166,16 @@ namespace ConOnesProject
                     check = true;
                 }
             }
+
             return check;
         }
+
 
         public void Get_entries_to_delete()
         {
             List<Entries_to_delete> entry_to_delete = Column_to_delete(false);
-
-            /*for (int i = 0; i < entry_to_delete.Count; i++)
-            {
-                Console.WriteLine(entry_to_delete[i].start + " " + entry_to_delete[i].length + " " + entry_to_delete[i].row_id);
-            }*/
-            //Console.WriteLine();
-
             rev_row = Get_rev_row();
             List<Entries_to_delete> rev_entry_to_delete = Column_to_delete(true);
-            /*
-            for (int i = 0; i < rev_entry_to_delete.Count; i++)
-            {
-                Console.WriteLine(rev_entry_to_delete[i].start + " " + rev_entry_to_delete[i].length + " " + rev_entry_to_delete[i].row_id);
-            }*/
-
-            //Console.WriteLine(row.Count);
 
             for (int i = 0; i < rev_entry_to_delete.Count; i++)
             {
@@ -230,68 +185,26 @@ namespace ConOnesProject
                 bool is_entry_in_list = check_entry_in_list(entry_to_delete, new_start, rev_entry_to_delete[i].length);
                 if (is_entry_in_list == false)
                 {
-                    if (new_start < 0)
-                    {
-                        Console.WriteLine("rev start: " + rev_entry_to_delete[i].start + "rev_len: " + rev_entry_to_delete[i].length + "row count: " + row.Count);
-                        Console.WriteLine("new_start: " + new_start);
-                    }
                     entry_to_delete.Add(new Entries_to_delete(new_start, rev_entry_to_delete[i].length, rev_entry_to_delete[i].id));
-
                 }
             }
 
-
-            /*Console.WriteLine();
-            for (int i = 0; i < entry_to_delete.Count; i++)
-            {
-                Console.Write(entry_to_delete[i].start + " " + entry_to_delete[i].length + " " + entry_to_delete[i].row_id + " columns: " );
-                for(int j=0;j<entry_to_delete[i].columns.Count; j++)
-                {
-                    Console.Write(entry_to_delete[i].columns[j] + " ");
-                }Console.WriteLine();
-            }*/
-
-
-            /*
-            for(int i=0;i<rev_row.Count; i++)
-            {
-                Console.Write(rev_row[i] + " ");
-            }
-            Console.WriteLine();
-
-            for (int i = 0; i < row.Count; i++)
-            {
-                Console.Write(row[i] + " ");
-            }
-            Console.WriteLine();
-            */
-
-
             number_of_results = Count_of_results(entry_to_delete);
-
             List<int> list_of_groups = new List<int>();
-
             for (int i = 0; i < entry_to_delete.Count; i++)
             {
                 if (!list_of_groups.Contains(entry_to_delete[i].id))
                 {
                     list_of_groups.Add(entry_to_delete[i].id);
                 }
-
             }
-
             number_of_groups = list_of_groups.Count;
             entries_to_delete = entry_to_delete;
-
         }
 
 
-
-
-
-        int Count_of_results(List<Entries_to_delete> entries) // dodaj check czy mogą stać obok siebie rozwiązania
-        {
-
+        int Count_of_results(List<Entries_to_delete> entries)
+        { 
             List<int> list_of_groups = new List<int>();
             for (int i = 0; i < entries.Count; i++)
             {
@@ -316,8 +229,8 @@ namespace ConOnesProject
             }
 
             return number_of_result;
-
         }
+
 
         public List<Entries_to_delete> Column_to_delete(bool reverse)
         {
@@ -328,15 +241,9 @@ namespace ConOnesProject
                 return none_entries;
 
             }
-            //for(int i = 0; i < ones_entries.Count; i++)
-            //{
-            //  Console.Write(ones_entries[i].start + " " + ones_entries[i].length);
-            // Console.WriteLine();
-            //}
 
             int ones_entries_len = ones_entries.Count;
             int last_seq_start_idx = ones_entries_len - 1;
-
             int previous_zero_length = 0;
             int seq_len = ones_entries[0].length;
             int final_seq_start = ones_entries[0].start;
@@ -349,53 +256,33 @@ namespace ConOnesProject
                     break;
                 }
 
-
                 int seq_start = ones_entries[i].start;
                 int seq_end = ones_entries[i].start + ones_entries[i].length - 1;
-
                 int next_seq_start = ones_entries[i + 1].start;
                 int next_seq_len = ones_entries[i + 1].length;
                 int next_seq_end = next_seq_start + next_seq_len - 1;
-
                 int zeros_length = next_seq_start - seq_end - 1 + previous_zero_length;
 
                 if (seq_len >= zeros_length && next_seq_len >= zeros_length)
                 {
-                    //Console.WriteLine("tu1");
                     if (seq_len == zeros_length && zeros_length == next_seq_len)
                     {
-                        // if (seq_start + seq_start + seq_len > 23)
-                        //   Console.WriteLine("tu2");
-                        //if (seq_end + 1 + zeros_length > 23)
-                        //  Console.WriteLine("tu3");
-                        // if (next_seq_start + next_seq_len > 23)
-                        //   Console.WriteLine("tu4");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else if (seq_len == zeros_length && zeros_length != next_seq_len)
                     {
-                        if (seq_start < 0)
-                            Console.WriteLine("tu5");
-                        if (seq_end < 0)
-                            Console.WriteLine("tu6");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                     }
                     else if (seq_len != zeros_length && zeros_length == next_seq_len)
                     {
-                        if (seq_end + 1 < 0)
-                            Console.WriteLine("tu7");
-                        if (next_seq_start < 0)
-                            Console.WriteLine("tu8");
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else
                     {
-                        if (seq_end < 0)
-                            Console.WriteLine("tu9");
                         entry_to_delete.Add(new Entries_to_delete(seq_end + 1, zeros_length, i));
                     }
                     seq_len += next_seq_len;
@@ -403,28 +290,17 @@ namespace ConOnesProject
 
                 if (next_seq_len >= seq_len && seq_len < zeros_length)
                 {
-                    //Console.WriteLine("tu2");
-                    //Console.WriteLine("tu2 " + seq_len + ' ' + next_seq_len + ' ' + zeros_length);
                     if (seq_len == next_seq_len)
                     {
-                        if (seq_start < 0)
-                            Console.WriteLine("tu10");
-                        if (next_seq_start < 0)
-                            Console.WriteLine("tu11");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
                         entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
                     }
                     else if (i == 0)
                     {
-                        if (seq_start < 0)
-                            Console.WriteLine("tu12");
                         entry_to_delete.Add(new Entries_to_delete(seq_start, seq_len, i));
-                        //entry_to_delete.Add(new Entries_to_delete(ones_entries[i-1].start, ones_entries[i-1].start + ones_entries[i-1].length, i));
                     }
                     else
                     {
-                        if (ones_entries[i - 1].start < 0)
-                            Console.WriteLine("tu13");
                         entry_to_delete.Add(new Entries_to_delete(ones_entries[i - 1].start, ones_entries[i - 1].length, i));
                     }
                     seq_len = next_seq_len;
@@ -434,42 +310,21 @@ namespace ConOnesProject
 
                 if (next_seq_len < zeros_length && seq_len > next_seq_len)
                 {
-
-                    //Console.WriteLine("tu3");
-                    //Console.WriteLine(seq_start + " " + seq_len);
-                    //Console.WriteLine(next_seq_len + " " + zeros_length + " " + seq_len);
-                    //Console.WriteLine("i, last_seq_start_idx: " + i + ' ' + last_seq_start_idx);
                     if (i + 1 != last_seq_start_idx)
                     {
                         int next_zeros_seq_start = next_seq_end + 1;
                         int next_zeros_seq_len = (ones_entries[i + 2].start) - (next_seq_end + 1);
                         if (next_seq_len == next_zeros_seq_len)
                         {
-                            if (next_zeros_seq_start < 0)
-                                Console.WriteLine("tu14");
                             entry_to_delete.Add(new Entries_to_delete(next_zeros_seq_start, next_zeros_seq_len, i));
-                            //Console.WriteLine(next_zeros_seq_start + " " + next_zeros_seq_len);
                         }
                     }
-                    if (next_seq_start < 0)
-                        Console.WriteLine("tu15");
                     entry_to_delete.Add(new Entries_to_delete(next_seq_start, next_seq_len, i));
-                    //Console.WriteLine(next_seq_start + " " + next_seq_len);
                     previous_zero_length = zeros_length;
                 }
             }
-
-            //return entry_to_delete;
             List<Entries_to_delete> sorted_entry_to_delete = entry_to_delete.OrderBy(o => o.start).ToList();
-
-            /*Console.WriteLine("xxxxxxxxx");
-            for(int i=0;i<sorted_entry_to_delete.Count;i++)
-            {
-                Console.Write(sorted_entry_to_delete[i].start+ " ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("xxxxxxx");
-            */
+            
             return sorted_entry_to_delete;
         }
     }

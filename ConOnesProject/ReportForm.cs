@@ -27,8 +27,6 @@ namespace ConOnesProject
         private void button1_Click(object sender, EventArgs e)
         {
             string fileName = textBox1.Text + ".txt";
-
-
             using (TextWriter tw = new StreamWriter(fileName))
             {
                 tw.Write("Input matrix: ");
@@ -135,10 +133,8 @@ namespace ConOnesProject
                 tw.WriteLine();
                 tw.WriteLine();
                 tw.Write("TabuSearch working time: " + resultMatrix.seconds);
-                
             }
             this.Close();
-
         }
     }
 }

@@ -51,7 +51,6 @@ namespace ConOnesProject
                 return;
 
             }
-
             bool showMatrix = true;
             int width = newMatrix.width;
             int height = newMatrix.height;
@@ -67,6 +66,5 @@ namespace ConOnesProject
             menuForm.matrixFilePath(inputFilePath, showMatrix);
             this.Close();
         }
-
     }
 }

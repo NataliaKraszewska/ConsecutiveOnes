@@ -43,14 +43,11 @@ namespace ConOnesProject
                 MessageBox.Show("All rows and columns must have the same size and matrix must contains only 0 and 1 values!");
                 return;
             }
-
             if (newMatrix.matrix.GetLength(0) == 1 || newMatrix.matrix.GetLength(1) == 1)
             {
                 MessageBox.Show("Matrix is too small!");
                 return;
-
             }
-
             string type = "file";
             menuForm.addMatrixFromText(matrixText, type);
             this.Close();

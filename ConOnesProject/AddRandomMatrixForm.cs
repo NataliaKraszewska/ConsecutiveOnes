@@ -40,8 +40,7 @@ namespace ConOnesProject
             int heightText;
             int numberOfMistakesText;
 
-            int i;
-            if (!int.TryParse(textBox1.Text, out i) || textBox1.Text == "0")
+            if (!int.TryParse(textBox1.Text, out int i) || textBox1.Text == "0")
             {
                 MessageBox.Show("Add value too width field!!!");
                 return;
@@ -79,7 +78,6 @@ namespace ConOnesProject
             }
 
             int percentageLen = Convert.ToInt32(lenChoiceText.Substring(0, lenChoiceText.Length - 1));
-
             int maxNumberOfMistakes = (widthText-2) * heightText;
 
             if (!int.TryParse(textBox3.Text, out i))
@@ -114,9 +112,7 @@ namespace ConOnesProject
                     showMatrix = false;
                 }
             }
-
             menuForm.addRandomMatrix(widthText, heightText, numberOfMistakesText, lenChoiceText, showMatrix);
-
             this.Close();
         }
     }

@@ -15,7 +15,6 @@ namespace ConOnesProject
         int percentageLengthStringOfOnes;
         Random rPosition = new Random();
 
-
         public RandomMatrix(int aWidth, int aHeight, int aNumberOfMistakes, int aPercentageLengthStringOfOnes)
         {
             width = aWidth;
@@ -63,7 +62,6 @@ namespace ConOnesProject
                 for (int j = startStringOfOnes; j < endStringOfOnes; j++)
                     matrix[i, j] = 1;
             }
-
         }
 
 
@@ -83,6 +81,7 @@ namespace ConOnesProject
             return tmpMatrix;
         }
 
+
         int GetHeight(List<int> visitedRow)
         {
             int row = rPosition.Next(height);
@@ -91,6 +90,7 @@ namespace ConOnesProject
 
             return row;
         }
+
 
         void AddMistakesToMatrix(int[,] matrix)
         {
@@ -134,11 +134,9 @@ namespace ConOnesProject
                         mistakesCount++;
                         break;
                     }
-
                 }
                 if (visitedRow.Count == height)
                     mistakesCount = numberOfMistakes;
-
             }
         }
 

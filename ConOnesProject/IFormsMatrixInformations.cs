@@ -12,6 +12,5 @@ namespace ConOnesProject
         void addMatrixFromText(string text, string type);
         void matrixFilePath(string text, bool show);
         void resultMatrix(int[,] matrix, int cmax, List<int> columnsOrder, List<int> columnsToDelete, int diverse, int newResultCount, int tabuListSize, int maxCountTheSameResult, string seconds, bool show, int percentageOfDivSteps);
-
     }
 }

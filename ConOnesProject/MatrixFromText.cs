@@ -30,9 +30,9 @@ namespace ConOnesProject
                     height++;
             }
             width = (textFromUser.Count(x => x == '0') + textFromUser.Count(x => x == '1')) / height;
-
             matrix = new int[height, width];
             int i = 0;
+
             try
             {
                 foreach (string line in textFromUser.Split('\n'))
@@ -45,15 +45,13 @@ namespace ConOnesProject
                     if (line.Length != 0)
                         i++;
                 }
-                return matrix;
 
+                return matrix;
             }
             catch(IndexOutOfRangeException e)
             {
                 return null;
             }
-
-            
         }
     }
 }

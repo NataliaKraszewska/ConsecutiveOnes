@@ -41,10 +41,9 @@ namespace ConOnesProject
             return true;
         }
 
+
         List<int> Get_column_to_delete_from_one_row(Row row)
         {
-
-            //Console.WriteLine("______________________________________________");
             List<Entries_to_delete> best_entry = new List<Entries_to_delete>();
             List<int> columns_to_delete = new List<int>();
             if (row.number_of_results == 1)
@@ -54,7 +53,6 @@ namespace ConOnesProject
                     for (int y = 0; y < row.entries_to_delete[x].columns.Count; y++)
                     {
                         columns_to_delete.Add(row.entries_to_delete[x].columns[y]);
-                        //Console.WriteLine("tu1: " + row.entries_to_delete[x].columns[y]);
                     }
                     if (!best_entry.Contains(row.entries_to_delete[x]))
                         best_entry.Add(row.entries_to_delete[x]);
@@ -63,7 +61,6 @@ namespace ConOnesProject
             }
             else
             {
-                //Console.WriteLine("------------ columns in row -------------------");
                 int number_of_groups = row.number_of_groups;
                 for (int x = 0; x < number_of_groups; x++)
                 {
@@ -71,11 +68,7 @@ namespace ConOnesProject
                     for (int y = 0; y < row.entries_to_delete.Count; y++)
                     {
                         if (row.entries_to_delete[y].id == x)
-                        {
                             entry_to_del_by_len.Add(row.entries_to_delete[y]);
-                            //for(int a = 0; a< row.entries_to_delete[y].columns.Count;a++)
-                            //  Console.Write(row.entries_to_delete[y].columns[a] + " ");
-                        }//Console.WriteLine();
                         entry_to_del_by_len = entry_to_del_by_len.OrderBy(o => o.length).ToList();
                     }
 
@@ -92,15 +85,11 @@ namespace ConOnesProject
                         {
                             for (int j = 0; j < candidate_to_del.columns.Count; j++)
                             {
-
                                 columns_to_delete.Add(candidate_to_del.columns[j]);
-                                //Console.WriteLine("tu2: " + candidate_to_del.columns[j]);
-
                             }
                             best_entry.Add(candidate_to_del);
                             i = entry_to_del_by_len.Count;
                         }
-
 
                         else
                         {
@@ -108,66 +97,39 @@ namespace ConOnesProject
                             {
                                 if (!(candidate_to_del.start <= best_entry[best_entry.Count - 1].start && candidate_to_del.start + candidate_to_del.length >= best_entry[best_entry.Count - 1].start))
                                 {
-
                                     for (int j = 0; j < candidate_to_del.columns.Count; j++)
                                     {
-
                                         columns_to_delete.Add(candidate_to_del.columns[j]);
-                                        //Console.WriteLine("tu3: " + candidate_to_del.columns[j]);
-                                        /*if(candidate_to_del.columns[j]  < 0)
-                                        {
-                                            Console.WriteLine("candidate to del columns: ");
-                                            for(int a = 0; a<candidate_to_del.columns.Count;a++)
-                                            {
-                                                Console.Write(candidate_to_del.columns[a] + " ");
-                                            }Console.WriteLine();
-                                        }*/
-
                                     }
                                     best_entry.Add(candidate_to_del);
                                     i = entry_to_del_by_len.Count;
                                 }
                             }
-
                         }
-
-
                     }
-
                 }
-
             }
-
-            // for(int i = 0; i < columns_to_delete.Count; i++)
-            //{
-            //  Console.Write(columns_to_delete[i] + " ");
-            //}Console.WriteLine();
-
             List<int> columns_to_delete_from_matrix = row.Get_columns_to_delete_from_matrix(columns_to_delete);
 
             return columns_to_delete_from_matrix;
-
         }
 
 
         List<int> Get_columns_to_delete(List<Row> rows_object)
         {
             List<int> columns_to_delete = new List<int>();
-
             while (rows_object.Count != 0)
             {
-                for (int i = 0; i < rows_object.Count; i++) //dla kazdego wiersza oblicz entries do usuniecia
+                for (int i = 0; i < rows_object.Count; i++)
                 {
                     rows_object[i].Get_entries_to_delete();
                 }
 
-                List<Row> rows_sorted_by_results = rows_object.OrderBy(o => o.number_of_results).ToList(); //posortuj wyniki po ilosci mozliwych wynikow
-                Row current_row = rows_sorted_by_results[0]; //wybierz pierwszy wynik
-
-                current_row.Change_row(columns_to_delete); //usuwamy usuniete juz kolumny z wiersza
-                current_row.Get_entries_to_delete(); //teraz obliczamy entries
-
-                List<int> columns_to_delete_from_row = Get_column_to_delete_from_one_row(current_row); //dodajemy kolumny do usuniecia
+                List<Row> rows_sorted_by_results = rows_object.OrderBy(o => o.number_of_results).ToList();
+                Row current_row = rows_sorted_by_results[0];
+                current_row.Change_row(columns_to_delete);
+                current_row.Get_entries_to_delete();
+                List<int> columns_to_delete_from_row = Get_column_to_delete_from_one_row(current_row);
 
                 for (int x = 0; x < columns_to_delete_from_row.Count; x++)
                 {
@@ -185,13 +147,12 @@ namespace ConOnesProject
                     }
                 }
             }
-
-
             columns_to_delete.Sort();
             columns_to_delete_in_matrix = columns_to_delete;
 
             return columns_to_delete;
         }
+
 
         bool IsMatrixConsecutiveOnes(int[,] matrix)
         {
@@ -218,8 +179,10 @@ namespace ConOnesProject
                     }
                 }
             }
+
             return true;
         }
+
 
         public static int[,] TrimArray(int rowToRemove, int columnToRemove, int[,] originalArray)
         {
@@ -274,13 +237,9 @@ namespace ConOnesProject
                 rows_object.Add(current_row);
                 current_row = null;
             }
-
             List<int> columns_to_delete = Get_columns_to_delete(rows_object);
 
-
             return columns_to_delete.Count;
-
-
         }
     }
 }
